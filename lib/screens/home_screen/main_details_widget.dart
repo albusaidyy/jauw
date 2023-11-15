@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../../models/current_weather.dart';
 import '../../utils/constants.dart';
 
 class MainDetailsWidget extends StatelessWidget {
   const MainDetailsWidget({
     super.key,
+    required this.value,
+    required this.mMain,
   });
+  final List<Weather> value;
+  final Mmain mMain;
 
   @override
   Widget build(BuildContext context) {
@@ -20,15 +25,16 @@ class MainDetailsWidget extends StatelessWidget {
           Container(
             width: 95,
             height: 95,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/icon_sunny.png'),
+                image: NetworkImage(
+                    'https://openweathermap.org/img/w/${value[0].icon}.png'),
                 fit: BoxFit.fill,
               ),
             ),
           ),
           Text(
-            'Sunny',
+            value[0].wMain!,
             style: kBoldFont.copyWith(shadows: [
               const Shadow(
                 color: Color(0x3E000000),
@@ -38,12 +44,12 @@ class MainDetailsWidget extends StatelessWidget {
             ], fontWeight: FontWeight.w700, height: 0),
           ),
           Row(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '33',
+                mMain.temp!.toStringAsFixed(0),
                 style: kMediumFont.copyWith(
                   fontSize: 86,
                   height: 0,

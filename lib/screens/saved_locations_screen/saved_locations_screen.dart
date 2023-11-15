@@ -32,7 +32,8 @@ class SavedLocationsScreen extends StatelessWidget {
         child: const Column(
           children: [
             HeaderSavedLocations(),
-            LocationListingWidget(),
+            Expanded(child: LocationListingWidget())
+            ,
             AddNewWidget(),
           ],
         ),

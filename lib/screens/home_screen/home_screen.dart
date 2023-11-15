@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:weather_app/models/current_weather.dart';
 import 'package:weather_app/screens/saved_locations_screen/saved_locations_screen.dart';
 
+import '../../provider/current_weather_provider.dart';
 import '../../utils/constants.dart';
 import 'details_widget.dart';
 import 'main_details_widget.dart';
@@ -13,90 +16,116 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Stack(
-        children: [
-          Container(
-            decoration: const BoxDecoration(
+          child: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/images/background.png'),
+              fit: BoxFit.cover),
+        ),
+        child: Consumer(
+          builder: (context, ref, child) {
+            final AsyncValue<CurrentWeather> currentWeather =
+                ref.watch(currentWeatherProvider);
+
+            return Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage('assets/images/background.png'),
-                    fit: BoxFit.cover)),
-          ),
-          Positioned(
-            top: 32,
-            left: 24,
-            right: 24,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Icon(
-                  shadows: [
-                    Shadow(
-                        color: Color(0x3E000000),
-                        blurRadius: 4,
-                        offset: Offset(0, 4))
-                  ],
-                  Icons.location_on,
-                  color: Colors.white,
-                  size: 31.44,
-                ),
-                const SizedBox(
-                  width: 4,
-                ),
-                const Text('New York', style: kRegularFont),
-                const Spacer(),
-                GestureDetector(
-                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const SavedLocationsScreen(),
-                  )),
-                  child: const Icon(
-                    Icons.menu,
-                    color: Colors.white,
-                    size: 32,
-                    shadows: [
-                      Shadow(
-                        color: Color(0x3E000000),
-                        blurRadius: 4,
-                        offset: Offset(0, 4),
+                    fit: BoxFit.cover),
+              ),
+              child: switch (currentWeather) {
+                AsyncData(:final value) => Stack(
+                    children: [
+                      Positioned(
+                        top: 32,
+                        left: 24,
+                        right: 24,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              shadows: [
+                                Shadow(
+                                    color: Color(0x3E000000),
+                                    blurRadius: 4,
+                                    offset: Offset(0, 4))
+                              ],
+                              Icons.location_on,
+                              color: Colors.white,
+                              size: 31.44,
+                            ),
+                            const SizedBox(
+                              width: 4,
+                            ),
+                            Text(value.name!, style: kRegularFont),
+                            const Spacer(),
+                            GestureDetector(
+                              onTap: () =>
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    const SavedLocationsScreen(),
+                              )),
+                              child: const Icon(
+                                Icons.menu,
+                                color: Colors.white,
+                                size: 32,
+                                shadows: [
+                                  Shadow(
+                                    color: Color(0x3E000000),
+                                    blurRadius: 4,
+                                    offset: Offset(0, 4),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
+                      Positioned(
+                        top: 125,
+                        left: 0,
+                        right: 0,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Text(
+                              'June 10',
+                              style: kMediumFont,
+                            ),
+                            const SizedBox(
+                              height: 9.0,
+                            ),
+                            Text(
+                              'Updated as of 10:14 PM GMT-4',
+                              style: kLightFont.copyWith(
+                                shadows: [
+                                  const Shadow(
+                                    color: Color(0x3E000000),
+                                    blurRadius: 4,
+                                    offset: Offset(0, 4),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      MainDetailsWidget(
+                          value: value.weather!, mMain: value.mMain!),
+                      DetailsWidget(wind: value.wind!, mMain: value.mMain!),
+                      const NextWeekWidget()
                     ],
                   ),
-                )
-              ],
-            ),
-          ),
-          Positioned(
-            top: 125,
-            left: 0,
-            right: 0,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Text(
-                  'June 10',
-                  style: kMediumFont,
-                ),
-                const SizedBox(
-                  height: 9.0,
-                ),
-                Text(
-                  'Updated as of 10:14 PM GMT-4',
-                  style: kLightFont.copyWith(
-                    shadows: [
-                      const Shadow(
-                        color: Color(0x3E000000),
-                        blurRadius: 4,
-                        offset: Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-          const MainDetailsWidget(),
-          const DetailsWidget(),
-          const NextWeekWidget()
-        ],
+                //incase of an error
+                AsyncError(:final error) =>
+                  Text('Oops, something unexpected happened: $error'),
+                _ => const CircularProgressIndicator(),
+              },
+            );
+          },
+        ),
       )),
     );
   }

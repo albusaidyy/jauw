@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../utils/constants.dart';
 
@@ -64,8 +63,8 @@ class NextWeekWidget extends StatelessWidget {
                         SizedBox(
                           width: 41,
                           height: 32,
-                          child: SvgPicture.asset(
-                            'assets/images/icon_cloudy_sunny.svg',
+                          child: Image.asset(
+                            'assets/images/w_1.png',
                           ),
                         ),
                         const SizedBox(
@@ -128,8 +127,8 @@ class NextWeekWidget extends StatelessWidget {
                         SizedBox(
                           width: 41,
                           height: 32,
-                          child: SvgPicture.asset(
-                            'assets/images/icon_cloudy_sunny.svg',
+                          child: Image.asset(
+                            'assets/images/w_2.png',
                           ),
                         ),
                         const SizedBox(
@@ -192,8 +191,8 @@ class NextWeekWidget extends StatelessWidget {
                         SizedBox(
                           width: 41,
                           height: 32,
-                          child: SvgPicture.asset(
-                            'assets/images/icon_cloudy_sunny.svg',
+                          child: Image.asset(
+                            'assets/images/w_3.png',
                           ),
                         ),
                         const SizedBox(
@@ -256,8 +255,8 @@ class NextWeekWidget extends StatelessWidget {
                         SizedBox(
                           width: 41,
                           height: 32,
-                          child: SvgPicture.asset(
-                            'assets/images/icon_cloudy_sunny.svg',
+                          child: Image.asset(
+                            'assets/images/w_4.png',
                           ),
                         ),
                         const SizedBox(

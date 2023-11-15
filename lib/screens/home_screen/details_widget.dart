@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../models/current_weather.dart';
 import '../../utils/constants.dart';
 
 class DetailsWidget extends StatelessWidget {
   const DetailsWidget({
     super.key,
+    required this.wind,
+    required this.mMain,
   });
+  final Wind wind;
+  final Mmain mMain;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +56,7 @@ class DetailsWidget extends StatelessWidget {
                   height: 4,
                 ),
                 Text(
-                  '52\u0025',
+                  '${(mMain.humidity.toString())}\u0025',
                   style: kMediumFont.copyWith(
                     fontSize: 14,
                     shadows: [
@@ -95,7 +100,7 @@ class DetailsWidget extends StatelessWidget {
                   height: 4,
                 ),
                 Text(
-                  '15km/h',
+                  '${wind.speed}km/h',
                   style: kMediumFont.copyWith(
                     fontSize: 14,
                     shadows: [
@@ -139,7 +144,7 @@ class DetailsWidget extends StatelessWidget {
                   height: 4,
                 ),
                 Text(
-                  '24\u00B0',
+                  '${mMain.feelsLike}\u00B0',
                   style: kMediumFont.copyWith(
                     fontSize: 14,
                     shadows: [
