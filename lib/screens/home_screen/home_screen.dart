@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/models/current_weather.dart';
 import 'package:weather_app/screens/saved_locations_screen/saved_locations_screen.dart';
+import 'package:weather_app/utils/formart_utils.dart';
 
 import '../../provider/current_weather_provider.dart';
 import '../../utils/constants.dart';
@@ -90,15 +91,15 @@ class HomeScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            const Text(
-                              'June 10',
+                            Text(
+                              FormartUtils.formatDate(value.dt!),
                               style: kMediumFont,
                             ),
                             const SizedBox(
                               height: 9.0,
                             ),
                             Text(
-                              'Updated as of 10:14 PM GMT-4',
+                              'Updated as of ${FormartUtils().formatDateTimeWithTimeZone(dt: value.dt!,timeZone: value.timezone!)}',
                               style: kLightFont.copyWith(
                                 shadows: [
                                   const Shadow(
@@ -121,7 +122,21 @@ class HomeScreen extends StatelessWidget {
                 //incase of an error
                 AsyncError(:final error) =>
                   Text('Oops, something unexpected happened: $error'),
-                _ => const CircularProgressIndicator(),
+                _ => Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const CircularProgressIndicator(
+                          color: Colors.white, strokeWidth: 2),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        'Loading...',
+                        style: kBoldFont.copyWith(fontSize: 18),
+                      )
+                    ],
+                  ),
               },
             );
           },
