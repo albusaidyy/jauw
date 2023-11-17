@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_app/models/current_weather.dart';
+import 'package:weather_app/models/next_week_weather.dart';
+import 'package:weather_app/provider/next_week_weather_provider.dart';
 import 'package:weather_app/screens/saved_locations_screen/saved_locations_screen.dart';
 import 'package:weather_app/utils/formart_utils.dart';
 
-import '../../provider/current_weather_provider.dart';
 import '../../utils/constants.dart';
 import 'details_widget.dart';
 import 'main_details_widget.dart';
@@ -25,8 +25,13 @@ class HomeScreen extends StatelessWidget {
         ),
         child: Consumer(
           builder: (context, ref, child) {
-            final AsyncValue<CurrentWeather> currentWeather =
-                ref.watch(currentWeatherProvider);
+            // final AsyncValue<FiveDaysWeather> fiveDaysWeather =
+            //     ref.watch(fiveDaysWetherProvider);
+            // final AsyncValue<CurrentWeather> currentWeather =
+            //     ref.watch(currentWeatherProvider);
+
+            final AsyncValue<NextWeekWeather> nextWeekWeather =
+                ref.watch(nextwkeatherProvider);
 
             return Container(
               width: double.infinity,
@@ -36,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                     image: AssetImage('assets/images/background.png'),
                     fit: BoxFit.cover),
               ),
-              child: switch (currentWeather) {
+              child: switch (nextWeekWeather) {
                 AsyncData(:final value) => Stack(
                     children: [
                       Positioned(
@@ -60,7 +65,7 @@ class HomeScreen extends StatelessWidget {
                             const SizedBox(
                               width: 4,
                             ),
-                            Text(value.name!, style: kRegularFont),
+                            Text(value.location.name, style: kRegularFont),
                             const Spacer(),
                             GestureDetector(
                               onTap: () =>
@@ -92,14 +97,18 @@ class HomeScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              FormartUtils.formatDate(value.dt!),
+                              FormartUtils.formatDate(
+                                  value.location.localtimeEpoch),
                               style: kMediumFont,
                             ),
                             const SizedBox(
                               height: 9.0,
                             ),
                             Text(
-                              'Updated as of ${FormartUtils().formatDateTimeWithTimeZone(dt: value.dt!,timeZone: value.timezone!)}',
+                              'Updated as of ${FormartUtils().formatDateTimeWithTimeZone(
+                                dt: value.location.localtimeEpoch,
+                                // timeZone: value.timezone!
+                              )}',
                               style: kLightFont.copyWith(
                                 shadows: [
                                   const Shadow(
@@ -114,9 +123,10 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       MainDetailsWidget(
-                          value: value.weather!, mMain: value.mMain!),
-                      DetailsWidget(wind: value.wind!, mMain: value.mMain!),
-                      const NextWeekWidget()
+                        wCurrent: value.current,
+                       ),
+                      DetailsWidget(current: value.current),
+                       NextWeekWidget(forecastDay: value.forecast.forecastday,)
                     ],
                   ),
                 //incase of an error

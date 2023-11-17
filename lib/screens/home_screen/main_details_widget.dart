@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
 
-import '../../models/current_weather.dart';
+import '../../models/next_week_weather.dart';
 import '../../utils/constants.dart';
 
 class MainDetailsWidget extends StatelessWidget {
   const MainDetailsWidget({
     super.key,
-    required this.value,
-    required this.mMain,
+    required this.wCurrent,
+    // required this.value,
+    // required this.mMain,
   });
-  final List<Weather> value;
-  final Mmain mMain;
+  // final List<Weather> value;
+  // final Mmain mMain;
 
+  final Current wCurrent;
   @override
   Widget build(BuildContext context) {
     return Positioned(
       top: 230,
-      left: 119,
-      right: 119,
+      left: 0,
+      right: 0,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -27,14 +29,13 @@ class MainDetailsWidget extends StatelessWidget {
             height: 95,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(
-                    'https://openweathermap.org/img/w/${value[0].icon}.png'),
+                image: NetworkImage('https:${wCurrent.condition.icon}'),
                 fit: BoxFit.fill,
               ),
             ),
           ),
           Text(
-            value[0].wMain!,
+            wCurrent.condition.text,
             style: kBoldFont.copyWith(shadows: [
               const Shadow(
                 color: Color(0x3E000000),
@@ -49,7 +50,7 @@ class MainDetailsWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                mMain.temp!.toStringAsFixed(0),
+                wCurrent.tempC.toStringAsFixed(0),
                 style: kMediumFont.copyWith(
                   fontSize: 86,
                   height: 0,

@@ -1,16 +1,23 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:weather_app/models/next_week_weather.dart';
+import 'package:weather_app/utils/formart_utils.dart';
 
 import '../../utils/constants.dart';
 
 class NextWeekWidget extends StatelessWidget {
   const NextWeekWidget({
     super.key,
+    required this.forecastDay,
   });
+
+  final List<Forecastday> forecastDay;
 
   @override
   Widget build(BuildContext context) {
+// Get a sublist of forecastDay from index 8 to 12
+    List<Forecastday> sublist = forecastDay.sublist(8, 12);
     return Positioned(
       top: 617,
       left: 24,
@@ -39,271 +46,90 @@ class NextWeekWidget extends StatelessWidget {
                 top: 16,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Wed 16',
-                          style: kRegularFont.copyWith(
-                            fontSize: 14,
-                            shadows: [
-                              const Shadow(
-                                color: Color(0x3E000000),
-                                blurRadius: 4,
-                                offset: Offset(0, 4),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        SizedBox(
-                          width: 41,
-                          height: 32,
-                          child: Image.asset(
-                            'assets/images/w_1.png',
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 7,
-                        ),
-                        Text(
-                          '22\u00B0',
-                          style: kRegularFont.copyWith(fontSize: 16),
-                        ),
-                        const SizedBox(
-                          height: 7,
-                        ),
-                        Text(
-                          '1-5',
-                          style: kRegularFont.copyWith(
-                            fontSize: 10,
-                            shadows: [
-                              const Shadow(
-                                color: Color(0x3E000000),
-                                blurRadius: 4,
-                                offset: Offset(0, 4),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Text(
-                          'km/h',
-                          style: kRegularFont.copyWith(
-                            fontSize: 10,
-                            shadows: [
-                              const Shadow(
-                                color: Color(0x3E000000),
-                                blurRadius: 4,
-                                offset: Offset(0, 4),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Thu 17',
-                          style: kRegularFont.copyWith(
-                            fontSize: 14,
-                            shadows: [
-                              const Shadow(
-                                color: Color(0x3E000000),
-                                blurRadius: 4,
-                                offset: Offset(0, 4),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        SizedBox(
-                          width: 41,
-                          height: 32,
-                          child: Image.asset(
-                            'assets/images/w_2.png',
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 7,
-                        ),
-                        Text(
-                          '25\u00B0',
-                          style: kRegularFont.copyWith(fontSize: 16),
-                        ),
-                        const SizedBox(
-                          height: 7,
-                        ),
-                        Text(
-                          '1-5',
-                          style: kRegularFont.copyWith(
-                            fontSize: 10,
-                            shadows: [
-                              const Shadow(
-                                color: Color(0x3E000000),
-                                blurRadius: 4,
-                                offset: Offset(0, 4),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Text(
-                          'km/h',
-                          style: kRegularFont.copyWith(
-                            fontSize: 10,
-                            shadows: [
-                              const Shadow(
-                                color: Color(0x3E000000),
-                                blurRadius: 4,
-                                offset: Offset(0, 4),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Fri 18',
-                          style: kRegularFont.copyWith(
-                            fontSize: 14,
-                            shadows: [
-                              const Shadow(
-                                color: Color(0x3E000000),
-                                blurRadius: 4,
-                                offset: Offset(0, 4),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        SizedBox(
-                          width: 41,
-                          height: 32,
-                          child: Image.asset(
-                            'assets/images/w_3.png',
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 7,
-                        ),
-                        Text(
-                          '23\u00B0',
-                          style: kRegularFont.copyWith(fontSize: 16),
-                        ),
-                        const SizedBox(
-                          height: 7,
-                        ),
-                        Text(
-                          '1-5',
-                          style: kRegularFont.copyWith(
-                            fontSize: 10,
-                            shadows: [
-                              const Shadow(
-                                color: Color(0x3E000000),
-                                blurRadius: 4,
-                                offset: Offset(0, 4),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Text(
-                          'km/h',
-                          style: kRegularFont.copyWith(
-                            fontSize: 10,
-                            shadows: [
-                              const Shadow(
-                                color: Color(0x3E000000),
-                                blurRadius: 4,
-                                offset: Offset(0, 4),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Sat 19',
-                          style: kRegularFont.copyWith(
-                            fontSize: 14,
-                            shadows: [
-                              const Shadow(
-                                color: Color(0x3E000000),
-                                blurRadius: 4,
-                                offset: Offset(0, 4),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        SizedBox(
-                          width: 41,
-                          height: 32,
-                          child: Image.asset(
-                            'assets/images/w_4.png',
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 7,
-                        ),
-                        Text(
-                          '25\u00B0',
-                          style: kRegularFont.copyWith(fontSize: 16),
-                        ),
-                        const SizedBox(
-                          height: 7,
-                        ),
-                        Text(
-                          '1-5',
-                          style: kRegularFont.copyWith(
-                            fontSize: 10,
-                            shadows: [
-                              const Shadow(
-                                color: Color(0x3E000000),
-                                blurRadius: 4,
-                                offset: Offset(0, 4),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Text(
-                          'km/h',
-                          style: kRegularFont.copyWith(
-                            fontSize: 10,
-                            shadows: [
-                              const Shadow(
-                                color: Color(0x3E000000),
-                                blurRadius: 4,
-                                offset: Offset(0, 4),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                  children: sublist.asMap().entries.map((e) {
+                    final int index = e.key;
+                    return NextWeekItem(fDay: sublist[index]);
+                  }).toList(),
                 ),
               ),
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class NextWeekItem extends StatelessWidget {
+  const NextWeekItem({
+    super.key,
+    required this.fDay,
+  });
+  final Forecastday fDay;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          FormartUtils.formatDateOfWeek(fDay.dateEpoch),
+          style: kRegularFont.copyWith(
+            fontSize: 14,
+            shadows: [
+              const Shadow(
+                color: Color(0x3E000000),
+                blurRadius: 4,
+                offset: Offset(0, 4),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 12,
+        ),
+        SizedBox(
+          width: 41,
+          height: 32,
+          child: Image.network('https:${fDay.day.condition.icon}'),
+        ),
+        const SizedBox(
+          height: 7,
+        ),
+        Text(
+          '${fDay.day.avgtempC}\u00B0',
+          style: kRegularFont.copyWith(fontSize: 16),
+        ),
+        const SizedBox(
+          height: 7,
+        ),
+        Text(
+          fDay.day.maxwindKph.toStringAsFixed(1),
+          style: kRegularFont.copyWith(
+            fontSize: 10,
+            shadows: [
+              const Shadow(
+                color: Color(0x3E000000),
+                blurRadius: 4,
+                offset: Offset(0, 4),
+              ),
+            ],
+          ),
+        ),
+        Text(
+          'km/h',
+          style: kRegularFont.copyWith(
+            fontSize: 10,
+            shadows: [
+              const Shadow(
+                color: Color(0x3E000000),
+                blurRadius: 4,
+                offset: Offset(0, 4),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
