@@ -105,10 +105,9 @@ class HomeScreen extends StatelessWidget {
                               height: 9.0,
                             ),
                             Text(
-                              'Updated as of ${FormartUtils().formatDateTimeWithTimeZone(
-                                dt: value.location.localtimeEpoch,
-                                // timeZone: value.timezone!
-                              )}',
+                              'Updated as of ${FormartUtils().formatDateTimeWithTimeZone(dt: value.location.localtimeEpoch, localTime: value.location.localtime,
+                                  // timeZone: value.timezone!
+                                  )}',
                               style: kLightFont.copyWith(
                                 shadows: [
                                   const Shadow(
@@ -124,9 +123,11 @@ class HomeScreen extends StatelessWidget {
                       ),
                       MainDetailsWidget(
                         wCurrent: value.current,
-                       ),
+                      ),
                       DetailsWidget(current: value.current),
-                       NextWeekWidget(forecastDay: value.forecast.forecastday,)
+                      NextWeekWidget(
+                        forecastDay: value.forecast.forecastday,
+                      )
                     ],
                   ),
                 //incase of an error

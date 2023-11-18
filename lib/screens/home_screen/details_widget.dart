@@ -31,8 +31,7 @@ class DetailsWidget extends StatelessWidget {
                   'assets/images/icon_humidity.svg',
                   width: 30,
                   height: 30,
-                  colorFilter:
-                      const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                  fit: BoxFit.cover,
                 ),
                 const SizedBox(
                   height: 4,
@@ -75,8 +74,7 @@ class DetailsWidget extends StatelessWidget {
                   'assets/images/icon_wind.svg',
                   width: 30,
                   height: 30,
-                  colorFilter:
-                      const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                  fit: BoxFit.cover,
                 ),
                 const SizedBox(
                   height: 4,
@@ -119,8 +117,7 @@ class DetailsWidget extends StatelessWidget {
                   'assets/images/icon_feels_like.svg',
                   width: 30,
                   height: 30,
-                  colorFilter:
-                      const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                  fit: BoxFit.cover,
                 ),
                 const SizedBox(
                   height: 4,
