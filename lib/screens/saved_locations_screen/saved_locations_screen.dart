@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:weather_app/screens/saved_locations_screen/search_screen.dart';
 import 'package:weather_app/utils/constants.dart';
 
 import 'add_new_widget.dart';
@@ -32,8 +33,7 @@ class SavedLocationsScreen extends StatelessWidget {
         child: const Column(
           children: [
             HeaderSavedLocations(),
-            Expanded(child: LocationListingWidget())
-            ,
+            Expanded(child: LocationListingWidget()),
             AddNewWidget(),
           ],
         ),
@@ -61,14 +61,21 @@ class HeaderSavedLocations extends StatelessWidget {
               'Saved Locations',
               style: kRegularFont,
             ),
-            SvgPicture.asset(
-              'assets/images/icon_search.svg',
-              height: 32,
-              width: 32,
+            GestureDetector(
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const SearchScreen(),
+              )),
+              child: SvgPicture.asset(
+                'assets/images/icon_search.svg',
+                height: 32,
+                width: 32,
+              ),
             )
           ],
         ),
       ),
     );
   }
+
+  Future<void> bringUpSearchField() async {}
 }
