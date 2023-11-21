@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:weather_app/screens/saved_locations_screen/search_screen.dart';
+import 'package:weather_app/screens/search_screen/search_screen.dart';
 import 'package:weather_app/utils/constants.dart';
 
 import 'add_new_widget.dart';
@@ -77,5 +77,4 @@ class HeaderSavedLocations extends StatelessWidget {
     );
   }
 
-  Future<void> bringUpSearchField() async {}
 }

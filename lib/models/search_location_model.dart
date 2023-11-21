@@ -13,8 +13,7 @@ class SearchLocation {
   String toRawJson() => json.encode(toJson());
 
   factory SearchLocation.fromJson(List<dynamic> json) => SearchLocation(
-        locations:
-            List<SLocation>.from(json.map((x) => SLocation.fromJson(x))),
+        locations: List<SLocation>.from(json.map((x) => SLocation.fromJson(x))),
       );
 
   List<dynamic> toJson() =>
@@ -45,7 +44,10 @@ class SLocation {
 
   String toRawJson() => json.encode(toJson());
 
-  factory SLocation.fromJson(Map<String, dynamic> json) => SLocation(
+  factory SLocation.fromJson(
+    Map<String, dynamic> json,
+  ) =>
+      SLocation(
         id: json["id"],
         name: json["name"],
         region: json["region"],
