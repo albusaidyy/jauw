@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_app/models/next_week_weather.dart';
 import 'package:weather_app/provider/next_week_weather_provider.dart';
 import 'package:weather_app/screens/saved_locations_screen/saved_locations_screen.dart';
 import 'package:weather_app/utils/formart_utils.dart';
@@ -18,128 +17,137 @@ class HomeScreen extends ConsumerWidget {
     final nextWeekWeather = ref.watch(nextwkeatherProvider);
     return Scaffold(
       body: SafeArea(
-        child: RefreshIndicator(
-          onRefresh: () => ref.refresh(nextwkeatherProvider.future),
-          backgroundColor: Colors.white,
-          color: Colors.blue,
-          child: Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/images/background.png'),
-                  fit: BoxFit.cover),
+        child: LayoutBuilder(
+          builder: (context, constraints) => RefreshIndicator(
+            onRefresh: () => ref.refresh(locationProvider.future),
+            backgroundColor: Colors.white,
+            color: Colors.blue,
+            child: CustomScrollView(
+              slivers: [
+                SliverFillRemaining(
+                  child: Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/images/background.png'),
+                          fit: BoxFit.cover),
+                    ),
+                    child: switch (nextWeekWeather) {
+                      AsyncData(:final valueOrNull?) => Stack(
+                          children: [
+                            Positioned(
+                              top: 32,
+                              left: 24,
+                              right: 24,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  const Icon(
+                                    shadows: [
+                                      Shadow(
+                                          color: Color(0x3E000000),
+                                          blurRadius: 4,
+                                          offset: Offset(0, 4))
+                                    ],
+                                    Icons.location_on,
+                                    color: Colors.white,
+                                    size: 31.44,
+                                  ),
+                                  const SizedBox(
+                                    width: 4,
+                                  ),
+                                  Text(valueOrNull.location.name,
+                                      style: kRegularFont),
+                                  const Spacer(),
+                                  GestureDetector(
+                                    onTap: () => Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          const SavedLocationsScreen(),
+                                    )),
+                                    child: const Icon(
+                                      Icons.menu,
+                                      color: Colors.white,
+                                      size: 32,
+                                      shadows: [
+                                        Shadow(
+                                          color: Color(0x3E000000),
+                                          blurRadius: 4,
+                                          offset: Offset(0, 4),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Positioned(
+                              top: 125,
+                              left: 0,
+                              right: 0,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    FormartUtils.formatDate(
+                                        valueOrNull.location.localtimeEpoch),
+                                    style: kMediumFont,
+                                  ),
+                                  const SizedBox(
+                                    height: 9.0,
+                                  ),
+                                  Text(
+                                    'Updated as of ${FormartUtils().formatDateTimeWithTimeZone(
+                                      dt: valueOrNull.location.localtimeEpoch,
+                                      localTime: valueOrNull.location.localtime,
+                                      // timeZone: value.timezone!
+                                    )}',
+                                    style: kLightFont.copyWith(
+                                      shadows: [
+                                        const Shadow(
+                                          color: Color(0x3E000000),
+                                          blurRadius: 4,
+                                          offset: Offset(0, 4),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            MainDetailsWidget(
+                              wCurrent: valueOrNull.current,
+                            ),
+                            DetailsWidget(current: valueOrNull.current),
+                            NextWeekWidget(
+                              forecastDay: valueOrNull.forecast.forecastday,
+                            )
+                          ],
+                        ),
+                      //incase of an error
+                      AsyncError(:final error) =>
+                        Text('Oops, something unexpected happened: $error'),
+                      _ => Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const CircularProgressIndicator(
+                                color: Colors.white, strokeWidth: 2),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            Text(
+                              'Loading...',
+                              style: kBoldFont.copyWith(fontSize: 18),
+                            )
+                          ],
+                        ),
+                    },
+                  ),
+                )
+              ],
             ),
-            child: switch (nextWeekWeather) {
-              AsyncData(:final valueOrNull?) => Stack(
-                  children: [
-                    Positioned(
-                      top: 32,
-                      left: 24,
-                      right: 24,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            shadows: [
-                              Shadow(
-                                  color: Color(0x3E000000),
-                                  blurRadius: 4,
-                                  offset: Offset(0, 4))
-                            ],
-                            Icons.location_on,
-                            color: Colors.white,
-                            size: 31.44,
-                          ),
-                          const SizedBox(
-                            width: 4,
-                          ),
-                          Text(valueOrNull.location.name, style: kRegularFont),
-                          const Spacer(),
-                          GestureDetector(
-                            onTap: () =>
-                                Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) =>
-                                  const SavedLocationsScreen(),
-                            )),
-                            child: const Icon(
-                              Icons.menu,
-                              color: Colors.white,
-                              size: 32,
-                              shadows: [
-                                Shadow(
-                                  color: Color(0x3E000000),
-                                  blurRadius: 4,
-                                  offset: Offset(0, 4),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Positioned(
-                      top: 125,
-                      left: 0,
-                      right: 0,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            FormartUtils.formatDate(
-                                valueOrNull.location.localtimeEpoch),
-                            style: kMediumFont,
-                          ),
-                          const SizedBox(
-                            height: 9.0,
-                          ),
-                          Text(
-                            'Updated as of ${FormartUtils().formatDateTimeWithTimeZone(
-                              dt: valueOrNull.location.localtimeEpoch,
-                              localTime: valueOrNull.location.localtime,
-                              // timeZone: value.timezone!
-                            )}',
-                            style: kLightFont.copyWith(
-                              shadows: [
-                                const Shadow(
-                                  color: Color(0x3E000000),
-                                  blurRadius: 4,
-                                  offset: Offset(0, 4),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    MainDetailsWidget(
-                      wCurrent: valueOrNull.current,
-                    ),
-                    DetailsWidget(current: valueOrNull.current),
-                    NextWeekWidget(
-                      forecastDay: valueOrNull.forecast.forecastday,
-                    )
-                  ],
-                ),
-              //incase of an error
-              AsyncError(:final error) =>
-                Text('Oops, something unexpected happened: $error'),
-              _ => Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const CircularProgressIndicator(
-                        color: Colors.white, strokeWidth: 2),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      'Loading...',
-                      style: kBoldFont.copyWith(fontSize: 18),
-                    )
-                  ],
-                ),
-            },
           ),
         ),
       ),

@@ -24,7 +24,7 @@ final currentWeatherProvider =
 
   //decode the JSON payload
   final json = jsonDecode(response.body);
-  print('current: $json');
+  // print('current: $json');
   //Finally, convert the Mao into a CurrentWeather instance
   return CurrentWeather.fromJson(json);
 });

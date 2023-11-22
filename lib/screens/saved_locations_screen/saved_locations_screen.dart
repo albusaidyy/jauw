@@ -62,9 +62,11 @@ class HeaderSavedLocations extends StatelessWidget {
               style: kRegularFont,
             ),
             GestureDetector(
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const SearchScreen(),
-              )),
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SearchScreen(),
+                  )),
               child: SvgPicture.asset(
                 'assets/images/icon_search.svg',
                 height: 32,
@@ -76,5 +78,4 @@ class HeaderSavedLocations extends StatelessWidget {
       ),
     );
   }
-
 }
