@@ -8,12 +8,8 @@ import '../models/search_location_model.dart';
 
 final searchStringProvider = StateProvider<String>((ref) => '');
 
-// final addToListProvider = StateProvider<bool>((ref) => false);
-
-
 final searchLocationProvider = FutureProvider.autoDispose(
   (ref) async {
-
     // We obtain an HTTP client using the extension we created earlier.
     final client = await ref.getDebouncedHttpClient();
 

@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
-
 extension DebounceAndCancelExtension on Ref {
   /// Wait for [duration] (defaults to 500ms), and then return a [http.Client]
   /// which can be used to make a request.

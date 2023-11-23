@@ -28,6 +28,7 @@ class SLocation {
   final double lat;
   final double lon;
   final String url;
+  bool isLoading;
 
   SLocation({
     required this.id,
@@ -37,6 +38,7 @@ class SLocation {
     required this.lat,
     required this.lon,
     required this.url,
+    required this.isLoading,
   });
 
   factory SLocation.fromRawJson(String str) =>
@@ -54,7 +56,7 @@ class SLocation {
         country: json["country"],
         lat: json["lat"]?.toDouble(),
         lon: json["lon"]?.toDouble(),
-        url: json["url"],
+        url: json["url"], isLoading: false,
       );
 
   Map<String, dynamic> toJson() => {

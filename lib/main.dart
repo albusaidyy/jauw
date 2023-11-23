@@ -7,7 +7,6 @@ import 'screens/home_screen/home_screen.dart';
 void main() async {
   // Initialize the locale data
   await initializeDateFormatting();
-
   runApp(
     const ProviderScope(
       child: MainApp(),
