@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_app/models/current_weather.dart';
 import 'package:weather_app/models/search_location_model.dart';
 
-import '../../provider/current_weather_provider.dart';
 import '../../provider/search_location_provider.dart';
 import '../../utils/constants.dart';
 
@@ -36,17 +34,17 @@ class SearchResultsWidget extends ConsumerWidget {
                     itemCount: value.locations.length,
                     itemBuilder: (context, index) {
                       final location = value.locations[index];
-                      // final addingToList = ref.watch(addToListProvider);
-                      final savedList = [2801268, 279381];
-
                       return SearchResultItem(
-                          location: location, savedList: savedList);
+                        location: location,
+                      );
                     },
                   ),
 
-        //incase of an error
-        AsyncError(:final error) =>
-          Text('Oops, something unexpected happened: $error'),
+        // ignore: unused_local_variable
+        AsyncError(:final error) => Text(
+            'Oops, something unexpected happened',
+            style: kBoldFont.copyWith(fontSize: 18),
+          ),
         AsyncLoading() => Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -67,11 +65,9 @@ class SearchResultItem extends ConsumerStatefulWidget {
   const SearchResultItem({
     super.key,
     required this.location,
-    required this.savedList,
   });
 
   final SLocation location;
-  final List<int> savedList;
 
   @override
   ConsumerState<SearchResultItem> createState() => _SearchResultItemState();
@@ -80,13 +76,25 @@ class SearchResultItem extends ConsumerStatefulWidget {
 class _SearchResultItemState extends ConsumerState<SearchResultItem> {
   bool isLoading = false;
 
+  Future<void> addItemToList(List<int> savedList) async {
+    setState(() {
+      isLoading = true;
+    });
+
+    await Future.delayed(const Duration(seconds: 1));
+
+    savedList.add(widget.location.id);
+    ref.read(searchListProvider.notifier).update((state) => savedList);
+    ref.invalidate(fetchSavedListProvider);
+
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    AsyncValue<CurrentWeather>? getCurrentWeather;
-
-    if (isLoading)
-      // ignore: curly_braces_in_flow_control_structures
-      getCurrentWeather = ref.watch(currentWeatherProvider(widget.location.id));
+    final savedList = ref.watch(searchListProvider);
 
     return ListTile(
       title: Text(
@@ -116,7 +124,7 @@ class _SearchResultItemState extends ConsumerState<SearchResultItem> {
           ],
         ),
       ),
-      trailing: widget.savedList.contains(
+      trailing: savedList.contains(
               widget.location.id) //check if the id is present in or saved list
           ? Icon(
               Icons.check,
@@ -125,50 +133,25 @@ class _SearchResultItemState extends ConsumerState<SearchResultItem> {
             )
           : !isLoading
               ? GestureDetector(
-                  onTap: () => setState(() => isLoading = true),
+                  onTap: () {
+                    addItemToList(savedList);
+                  },
                   child: const Icon(
                     Icons.add,
                     color: Colors.white,
                     size: 18,
                   ),
                 )
-              : SizedBox(child: Consumer(
-                  builder: (context, ref, child) {
-                    final getCurrentWeather =
-                        ref.watch(currentWeatherProvider(widget.location.id));
-                    return getCurrentWeather.when(
-                      data: (_) {
-                        widget.savedList.add(widget.location.id);
-                        print(widget.savedList);
-                        return Icon(
-                          Icons.check,
-                          color: Colors.white.withOpacity(0.8),
-                          size: 18,
-                        );
-                      },
-                      error: (error, _) {
-                        print(error);
-                        return const Icon(
-                          Icons.cancel_outlined,
-                          color: Colors.white,
-                          size: 18,
-                        );
-                      },
-                      loading: () {
-                        return const SizedBox(
-                          width: 18,
-                          height: 18,
-                          child: Center(
-                            child: CircularProgressIndicator(
-                              color: Colors.white,
-                              strokeWidth: 1.5,
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                )),
+              : const SizedBox(
+                  width: 18,
+                  height: 18,
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                      strokeWidth: 1.5,
+                    ),
+                  ),
+                ),
     );
   }
 }

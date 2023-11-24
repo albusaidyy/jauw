@@ -96,7 +96,7 @@ class DetailsWidget extends StatelessWidget {
                   height: 4,
                 ),
                 Text(
-                  '${current.windKph}km/h',
+                  '${current.windKph.toStringAsFixed(0)}km/h',
                   style: kMediumFont.copyWith(
                     fontSize: 14,
                     shadows: [
@@ -139,7 +139,7 @@ class DetailsWidget extends StatelessWidget {
                   height: 4,
                 ),
                 Text(
-                  '${current.feelslikeC}\u00B0',
+                  '${current.feelslikeC.toStringAsFixed(0)}\u00B0',
                   style: kMediumFont.copyWith(
                     fontSize: 14,
                     shadows: [

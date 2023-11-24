@@ -16,10 +16,11 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final nextWeekWeather = ref.watch(nextwkeatherProvider);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) => RefreshIndicator(
-            onRefresh: () => ref.refresh(locationProvider.future),
+            onRefresh: () => ref.refresh(nextwkeatherProvider.future),
             backgroundColor: Colors.white,
             color: Colors.blue,
             child: CustomScrollView(
@@ -126,8 +127,11 @@ class HomeScreen extends ConsumerWidget {
                           ],
                         ),
                       //incase of an error
-                      AsyncError(:final error) =>
-                        Text('Oops, something unexpected happened: $error'),
+                      // ignore: unused_local_variable
+                      AsyncError(:final error) => Text(
+                          'Oops, something unexpected happened',
+                          style: kBoldFont.copyWith(fontSize: 18),
+                        ),
                       _ => Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,

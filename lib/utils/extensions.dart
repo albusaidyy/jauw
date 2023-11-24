@@ -7,19 +7,19 @@ extension DebounceAndCancelExtension on Ref {
   ///
   /// That client will automatically be closed when the provider is disposed.
   Future<http.Client> getDebouncedHttpClient([Duration? duration]) async {
-    // // First, we handle debouncing.
-    // var didDispose = false;
-    // onDispose(() => didDispose = true);
+    // First, we handle debouncing.
+    var didDispose = false;
+    onDispose(() => didDispose = true);
 
-    // // We delay the request by 500ms, to wait for the user to stop refreshing.
-    // await Future<void>.delayed(duration ?? const Duration(milliseconds: 500));
+    // We delay the request by 500ms, to wait for the user to stop refreshing.
+    await Future<void>.delayed(duration ?? const Duration(milliseconds: 500));
 
-    // // If the provider was disposed during the delay, it means that the user
-    // // refreshed again. We throw an exception to cancel the request.
-    // // It is safe to use an exception here, as it will be caught by Riverpod.
-    // if (didDispose) {
-    //   throw Exception('Cancelled');
-    // }
+    // If the provider was disposed during the delay, it means that the user
+    // refreshed again. We throw an exception to cancel the request.
+    // It is safe to use an exception here, as it will be caught by Riverpod.
+    if (didDispose) {
+      throw Exception('Cancelled');
+    }
 
     // We now create the client and close it when the provider is disposed.
     final client = http.Client();

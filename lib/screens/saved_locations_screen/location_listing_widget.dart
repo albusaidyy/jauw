@@ -1,34 +1,136 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:weather_app/models/next_week_weather.dart';
+import 'package:weather_app/provider/search_location_provider.dart';
+import 'package:weather_app/screens/saved_locations_screen/search_saved_location_widget.dart';
 
+import '../../provider/saved_list_provider.dart';
 import '../../utils/constants.dart';
 
-class LocationListingWidget extends StatelessWidget {
+class LocationListingWidget extends ConsumerWidget {
   const LocationListingWidget({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 550,
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-      child: ListView.builder(
-        physics: const BouncingScrollPhysics(),
-        itemCount: 4,
-        itemBuilder: (context, index) {
-          return const LocationItem();
-        },
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isSearching = ref.watch(searchListBoolNotifierProvider);
+    final isResult = ref.watch(noResultBoolNotifierProvider);
+
+    final fetchedSavedList = ref.watch(fetchSavedListProvider);
+    final query = ref.watch(searchQueryProvider);
+    final searchLSavedistNotifier = ref.watch(searchSavedListNotifierProvider);
+    return RefreshIndicator(
+      onRefresh: ()  => ref.refresh(fetchSavedListProvider.future),
+      child: Expanded(
+        child: Container(
+          height: 550,
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+          child: fetchedSavedList.when(
+            data: (data) {
+              return Column(
+                children: [
+                  isSearching
+                      ? ClipRRect(
+                          child: BackdropFilter(
+                            filter: ImageFilter.blur(sigmaX: 0, sigmaY: 4),
+                            child: Stack(
+                              children: [
+                                Opacity(
+                                  opacity: 0.60,
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 59,
+                                    decoration: ShapeDecoration(
+                                      color: const Color(0xB2AAA5A5),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(24),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SearchSavedLocatonWidget(
+                                    query: query, savedList: data),
+                              ],
+                            ),
+                          ),
+                        )
+                      : const SizedBox(),
+                  Expanded(
+                      child: isResult
+                          ? Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'No Results',
+                                  style: kBoldFont.copyWith(fontSize: 18),
+                                )
+                              ],
+                            )
+                          : (data.isEmpty)
+                              ? Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'No Saved Locations',
+                                      style: kBoldFont.copyWith(fontSize: 18),
+                                    )
+                                  ],
+                                )
+                              : ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  physics: const BouncingScrollPhysics(),
+                                  itemCount: searchLSavedistNotifier.isNotEmpty
+                                      ? searchLSavedistNotifier.length
+                                      : data.length,
+                                  itemBuilder: (context, index) {
+                                    return LocationItem(
+                                      weatherData:
+                                          searchLSavedistNotifier.isNotEmpty
+                                              ? searchLSavedistNotifier[index]
+                                              : data[index],
+                                    );
+                                  },
+                                )),
+                ],
+              );
+            },
+            error: (error, stackTrace) => Text(
+              'Oops, something unexpected happened',
+              style: kBoldFont.copyWith(fontSize: 18),
+            ),
+            loading: () => Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const CircularProgressIndicator(
+                    color: Colors.white, strokeWidth: 2),
+                const SizedBox(
+                  height: 8,
+                ),
+                Text(
+                  'Loading...',
+                  style: kBoldFont.copyWith(fontSize: 18),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
 }
 
 class LocationItem extends StatelessWidget {
+  final NextWeekWeather weatherData;
   const LocationItem({
     super.key,
+    required this.weatherData,
   });
 
   @override
@@ -66,7 +168,7 @@ class LocationItem extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '33',
+                            weatherData.current.tempC.toStringAsFixed(0),
                             style: kMediumFont.copyWith(
                               fontSize: 48,
                               shadows: [
@@ -104,7 +206,7 @@ class LocationItem extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'New York',
+                                  weatherData.location.name,
                                   style: kBoldFont.copyWith(
                                     fontSize: 24,
                                     shadows: [
@@ -120,7 +222,7 @@ class LocationItem extends StatelessWidget {
                                   height: 8,
                                 ),
                                 Text(
-                                  'Sunny',
+                                  weatherData.current.condition.text,
                                   style: kMediumFont.copyWith(
                                       fontSize: 16,
                                       color: Colors.white.withOpacity(0.80)),
@@ -130,10 +232,10 @@ class LocationItem extends StatelessWidget {
                             Container(
                               width: 56,
                               height: 56,
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: AssetImage(
-                                      'assets/images/icon_sunny_56.png'),
+                                  image: NetworkImage(
+                                      'https:${weatherData.current.condition.icon}'),
                                   fit: BoxFit.fill,
                                 ),
                               ),
@@ -156,7 +258,7 @@ class LocationItem extends StatelessWidget {
                               width: 4,
                             ),
                             Text(
-                              '52\u0025',
+                              '${weatherData.current.humidity}\u0025',
                               style: kRegularFont.copyWith(
                                 fontSize: 16,
                               ),
@@ -179,7 +281,7 @@ class LocationItem extends StatelessWidget {
                               width: 4,
                             ),
                             Text(
-                              '15km/h',
+                              '${weatherData.current.windKph.toStringAsFixed(0)}km/h',
                               style: kRegularFont.copyWith(
                                 fontSize: 16,
                               ),

@@ -97,14 +97,14 @@ class NextWeekItem extends StatelessWidget {
           height: 7,
         ),
         Text(
-          '${fDay.day.avgtempC}\u00B0',
+          '${fDay.day.avgtempC.toStringAsFixed(0)}\u00B0',
           style: kRegularFont.copyWith(fontSize: 16),
         ),
         const SizedBox(
           height: 7,
         ),
         Text(
-          fDay.day.maxwindKph.toStringAsFixed(1),
+          ' ${fDay.day.maxwindKph.toStringAsFixed(0)}\nkm/h',
           style: kRegularFont.copyWith(
             fontSize: 10,
             shadows: [
@@ -116,20 +116,7 @@ class NextWeekItem extends StatelessWidget {
             ],
           ),
         ),
-        Text(
-          'km/h',
-          style: kRegularFont.copyWith(
-            fontSize: 10,
-            shadows: [
-              const Shadow(
-                color: Color(0x3E000000),
-                blurRadius: 4,
-                offset: Offset(0, 4),
-              ),
-            ],
-          ),
-        ),
-      ],
+        ],
     );
   }
 }

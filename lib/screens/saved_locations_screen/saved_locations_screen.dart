@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:weather_app/screens/search_screen/search_screen.dart';
+import 'package:weather_app/provider/saved_list_provider.dart';
 import 'package:weather_app/utils/constants.dart';
 
 import 'add_new_widget.dart';
@@ -12,6 +13,7 @@ class SavedLocationsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
           child: Container(
         width: double.infinity,
@@ -42,13 +44,14 @@ class SavedLocationsScreen extends StatelessWidget {
   }
 }
 
-class HeaderSavedLocations extends StatelessWidget {
+class HeaderSavedLocations extends ConsumerWidget {
   const HeaderSavedLocations({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isSearching = ref.watch(searchListBoolNotifierProvider);
     return Padding(
       padding: const EdgeInsets.fromLTRB(24, 24, 32, 20),
       child: SizedBox(
@@ -62,17 +65,21 @@ class HeaderSavedLocations extends StatelessWidget {
               style: kRegularFont,
             ),
             GestureDetector(
-              onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SearchScreen(),
-                  )),
-              child: SvgPicture.asset(
-                'assets/images/icon_search.svg',
-                height: 32,
-                width: 32,
-              ),
-            )
+              onTap: () {
+                ref.read(searchListBoolNotifierProvider.notifier).update();
+              },
+              child: isSearching
+                  ? const Icon(
+                      Icons.cancel_outlined,
+                      color: Colors.white,
+                      size: 32,
+                    )
+                  : SvgPicture.asset(
+                      'assets/images/icon_search.svg',
+                      height: 32,
+                      width: 32,
+                    ),
+            ),
           ],
         ),
       ),
