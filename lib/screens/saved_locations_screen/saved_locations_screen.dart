@@ -7,36 +7,43 @@ import 'package:weather_app/utils/constants.dart';
 import 'add_new_widget.dart';
 import 'location_listing_widget.dart';
 
-class SavedLocationsScreen extends StatelessWidget {
+class SavedLocationsScreen extends ConsumerWidget {
   const SavedLocationsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        clipBehavior: Clip.antiAlias,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment(-0.21, -0.98),
-            end: Alignment(0.21, 0.98),
-            colors: [
-              Color(0xFF391A49),
-              Color(0xFF2F1D5B),
-              Color(0xFF262171),
-              Color(0xFF301D5B),
-              Color(0xFF391A49)
+  Widget build(BuildContext context, WidgetRef ref) {
+    return WillPopScope(
+      onWillPop: () async {
+        ref.invalidate(searchQueryProvider);
+        ref.invalidate(searchListBoolNotifierProvider);
+        return true;
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Container(
+          width: double.infinity,
+          height: double.infinity,
+          clipBehavior: Clip.antiAlias,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment(-0.21, -0.98),
+              end: Alignment(0.21, 0.98),
+              colors: [
+                Color(0xFF391A49),
+                Color(0xFF2F1D5B),
+                Color(0xFF262171),
+                Color(0xFF301D5B),
+                Color(0xFF391A49)
+              ],
+            ),
+          ),
+          child: const Column(
+            children: [
+              HeaderSavedLocations(),
+              Expanded(child: LocationListingWidget()),
+              AddNewWidget(),
             ],
           ),
-        ),
-        child: const Column(
-          children: [
-            HeaderSavedLocations(),
-            Expanded(child: LocationListingWidget()),
-            AddNewWidget(),
-          ],
         ),
       ),
     );

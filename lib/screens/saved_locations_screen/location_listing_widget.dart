@@ -16,109 +16,80 @@ class LocationListingWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isSearching = ref.watch(searchListBoolNotifierProvider);
+    // final isSearching = ref.watch(searchListBoolNotifierProvider);
     final isResult = ref.watch(noResultBoolNotifierProvider);
-
     final fetchedSavedList = ref.watch(fetchSavedListProvider);
     final query = ref.watch(searchQueryProvider);
     final searchLSavedistNotifier = ref.watch(searchSavedListNotifierProvider);
     return RefreshIndicator(
-      onRefresh: ()  => ref.refresh(fetchSavedListProvider.future),
-      child: Expanded(
-        child: Container(
-          height: 550,
-          width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-          child: fetchedSavedList.when(
-            data: (data) {
-              return Column(
-                children: [
-                  isSearching
-                      ? ClipRRect(
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 0, sigmaY: 4),
-                            child: Stack(
-                              children: [
-                                Opacity(
-                                  opacity: 0.60,
-                                  child: Container(
-                                    width: double.infinity,
-                                    height: 59,
-                                    decoration: ShapeDecoration(
-                                      color: const Color(0xB2AAA5A5),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(24),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SearchSavedLocatonWidget(
-                                    query: query, savedList: data),
-                              ],
-                            ),
-                          ),
-                        )
-                      : const SizedBox(),
-                  Expanded(
-                      child: isResult
-                          ? Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'No Results',
-                                  style: kBoldFont.copyWith(fontSize: 18),
-                                )
-                              ],
-                            )
-                          : (data.isEmpty)
-                              ? Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'No Saved Locations',
-                                      style: kBoldFont.copyWith(fontSize: 18),
-                                    )
-                                  ],
-                                )
-                              : ListView.builder(
-                                  padding: EdgeInsets.zero,
-                                  physics: const BouncingScrollPhysics(),
-                                  itemCount: searchLSavedistNotifier.isNotEmpty
-                                      ? searchLSavedistNotifier.length
-                                      : data.length,
-                                  itemBuilder: (context, index) {
-                                    return LocationItem(
-                                      weatherData:
-                                          searchLSavedistNotifier.isNotEmpty
-                                              ? searchLSavedistNotifier[index]
-                                              : data[index],
-                                    );
-                                  },
-                                )),
-                ],
-              );
-            },
-            error: (error, stackTrace) => Text(
-              'Oops, something unexpected happened',
-              style: kBoldFont.copyWith(fontSize: 18),
-            ),
-            loading: () => Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+      onRefresh: () async => ref.refresh(fetchSavedListProvider.future),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+        child: fetchedSavedList.when(
+          data: (data) {
+            return Column(
               children: [
-                const CircularProgressIndicator(
-                    color: Colors.white, strokeWidth: 2),
-                const SizedBox(
-                  height: 8,
-                ),
-                Text(
-                  'Loading...',
-                  style: kBoldFont.copyWith(fontSize: 18),
-                ),
+                SearchSavedLocatonWidget(query: query, savedList: data),
+                Expanded(
+                    child: isResult
+                        ? Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'No Results',
+                                style: kBoldFont.copyWith(fontSize: 18),
+                              )
+                            ],
+                          )
+                        : (data.isEmpty)
+                            ? Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'No Saved Locations',
+                                    style: kBoldFont.copyWith(fontSize: 18),
+                                  )
+                                ],
+                              )
+                            : ListView.builder(
+                                padding: EdgeInsets.zero,
+                                physics: const AlwaysScrollableScrollPhysics(),
+                                itemCount: searchLSavedistNotifier.isNotEmpty
+                                    ? searchLSavedistNotifier.length
+                                    : data.length,
+                                itemBuilder: (context, index) {
+                                  return LocationItem(
+                                    weatherData:
+                                        searchLSavedistNotifier.isNotEmpty
+                                            ? searchLSavedistNotifier[index]
+                                            : data[index],
+                                  );
+                                },
+                              )),
               ],
-            ),
+            );
+          },
+          error: (error, stackTrace) => Text(
+            'Oops, something unexpected happened',
+            style: kBoldFont.copyWith(fontSize: 18),
+          ),
+          loading: () => Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const CircularProgressIndicator(
+                  color: Colors.white, strokeWidth: 2),
+              const SizedBox(
+                height: 8,
+              ),
+              Text(
+                'Loading...',
+                style: kBoldFont.copyWith(fontSize: 18),
+              ),
+            ],
           ),
         ),
       ),

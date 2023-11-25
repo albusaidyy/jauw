@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -6,7 +7,8 @@ import '../../models/next_week_weather.dart';
 import '../../provider/saved_list_provider.dart';
 
 class SearchSavedLocatonWidget extends ConsumerStatefulWidget {
-  const SearchSavedLocatonWidget({super.key, required this.query, required this.savedList});
+  const SearchSavedLocatonWidget(
+      {super.key, required this.query, required this.savedList});
   final String query;
   final List<NextWeekWeather> savedList;
 
@@ -34,7 +36,16 @@ class _SearchWidgetState extends ConsumerState<SearchSavedLocatonWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    final isSearch = ref.watch(searchListBoolNotifierProvider);
+    return AnimatedContainer(
+      curve: Curves.easeOut,
+      duration: const Duration(milliseconds: 500),
+      height: isSearch ? 59 : 0,
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        border: Border.all(color: const Color(0xFFAAA5A5)),
+        borderRadius: BorderRadius.circular(24),
+      ),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
       child: SizedBox(
         width: double.infinity,
@@ -45,7 +56,6 @@ class _SearchWidgetState extends ConsumerState<SearchSavedLocatonWidget> {
             ref
                 .read(searchSavedListNotifierProvider.notifier)
                 .onSearchSavedList(widget.savedList);
-
           },
           focusNode: _focusNode,
           onTap: () {

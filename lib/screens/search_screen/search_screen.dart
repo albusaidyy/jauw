@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -69,96 +68,74 @@ class _SearchWidgetState extends ConsumerState<SearchWidget> {
         return true;
       },
       child: Padding(
-        padding: const EdgeInsets.only(top: 38, left: 24, right: 24),
-        child: ClipRRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 0, sigmaY: 4),
-            child: Stack(
-              children: [
-                Opacity(
-                  opacity: 0.60,
-                  child: Container(
-                    width: double.infinity,
-                    height: 59,
-                    decoration: ShapeDecoration(
-                      color: const Color(0xB2AAA5A5),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(24),
-                      ),
-                    ),
-                  ),
-                ),
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 5),
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: TextField(
-                          controller: _controller,
-                          onChanged: (value) {
-                            ref
-                                .read(searchStringProvider.notifier)
-                                .update((state) => value);
-                          },
-                          focusNode: _focusNode,
+        padding: const EdgeInsets.only(top: 50, left: 24, right: 24),
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+              width: double.infinity,
+              height: 59,
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                border: Border.all(color: const Color(0xFFAAA5A5)),
+                borderRadius: BorderRadius.circular(24),
+              ),
+              child: TextField(
+                controller: _controller,
+                onChanged: (value) {
+                  ref
+                      .read(searchStringProvider.notifier)
+                      .update((state) => value);
+                },
+                focusNode: _focusNode,
+                onTap: () {
+                  setState(() {
+                    isTapped = !isTapped;
+                  });
+                },
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.search,
+                cursorColor: Colors.white,
+                style: TextStyle(
+                    color: Colors.white.withOpacity(0.80),
+                    fontSize: 15,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w500),
+                decoration: InputDecoration(
+                  suffixIcon: _focusNode.hasFocus
+                      ? GestureDetector(
                           onTap: () {
-                            setState(() {
-                              isTapped = !isTapped;
-                            });
+                            // Dismiss the keyboard
+                            FocusScope.of(context).unfocus();
+                            !_focusNode.hasFocus;
+                            //remove the search string
+                            ref.invalidate(searchStringProvider);
+                            _controller.text = '';
                           },
-                          keyboardType: TextInputType.text,
-                          textInputAction: TextInputAction.search,
-                          cursorColor: Colors.white,
-                          style: TextStyle(
-                              color: Colors.white.withOpacity(0.80),
-                              fontSize: 15,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w500),
-                          decoration: InputDecoration(
-                            suffixIcon: _focusNode.hasFocus
-                                ? GestureDetector(
-                                    onTap: () {
-                                      // Dismiss the keyboard
-                                      FocusScope.of(context).unfocus();
-                                      !_focusNode.hasFocus;
-                                      //remove the search string
-                                      ref.invalidate(searchStringProvider);
-                                      _controller.text = '';
-                                    },
-                                    child: const Icon(
-                                      Icons.cancel_rounded,
-                                      color: Colors.white,
-                                    ),
-                                  )
-                                : Transform.scale(
-                                    scale: 0.5,
-                                    child: SvgPicture.asset(
-                                      'assets/images/icon_search.svg',
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                            border: InputBorder.none,
-                            hintText: 'Enter Location',
-                            hintStyle: TextStyle(
-                                color: Colors.white.withOpacity(0.80),
-                                fontSize: 15,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w500),
+                          child: const Icon(
+                            Icons.cancel_rounded,
+                            color: Colors.white,
+                          ),
+                        )
+                      : Transform.scale(
+                          scale: 0.5,
+                          child: SvgPicture.asset(
+                            'assets/images/icon_search.svg',
+                            fit: BoxFit.cover,
                           ),
                         ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const SearchResultsWidget(),
-                  ],
-                )
-              ],
+                  border: InputBorder.none,
+                  hintText: 'Enter Location',
+                  hintStyle: TextStyle(
+                      color: Colors.white.withOpacity(0.80),
+                      fontSize: 15,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500),
+                ),
+              ),
             ),
-          ),
+            const Expanded(child: SearchResultsWidget()),
+          ],
         ),
       ),
     );
