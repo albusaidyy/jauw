@@ -19,7 +19,7 @@ class NextWeekWidget extends StatelessWidget {
 // Get a sublist of forecastDay from index 8 to 12
     List<Forecastday> sublist = forecastDay.sublist(8, 12);
     return Positioned(
-      top: 617,
+      top: 635,
       left: 24,
       right: 24,
       child: ClipRRect(
@@ -76,6 +76,7 @@ class NextWeekItem extends StatelessWidget {
           FormartUtils.formatDateOfWeek(fDay.dateEpoch),
           style: kRegularFont.copyWith(
             fontSize: 14,
+            color: const Color(0xFFEBEBEB),
             shadows: [
               const Shadow(
                 color: Color(0x3E000000),
@@ -90,7 +91,7 @@ class NextWeekItem extends StatelessWidget {
         ),
         SizedBox(
           width: 41,
-          height: 32,
+          height: 35,
           child: Image.network('https:${fDay.day.condition.icon}'),
         ),
         const SizedBox(
@@ -98,15 +99,19 @@ class NextWeekItem extends StatelessWidget {
         ),
         Text(
           '${fDay.day.avgtempC.toStringAsFixed(0)}\u00B0',
-          style: kRegularFont.copyWith(fontSize: 16),
+          style: kRegularFont.copyWith(
+            fontSize: 16,
+            color: const Color(0xFFEBEBEB),
+          ),
         ),
         const SizedBox(
           height: 7,
         ),
         Text(
-          ' ${fDay.day.maxwindKph.toStringAsFixed(0)}\nkm/h',
+          fDay.day.maxwindKph.toStringAsFixed(0),
           style: kRegularFont.copyWith(
             fontSize: 10,
+            color: const Color(0xFFEBEBEB),
             shadows: [
               const Shadow(
                 color: Color(0x3E000000),
@@ -116,7 +121,21 @@ class NextWeekItem extends StatelessWidget {
             ],
           ),
         ),
-        ],
+        Text(
+          'km/h',
+          style: kRegularFont.copyWith(
+            fontSize: 10,
+            color: const Color(0xFFEBEBEB),
+            shadows: [
+              const Shadow(
+                color: Color(0x3E000000),
+                blurRadius: 4,
+                offset: Offset(0, 4),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

@@ -13,26 +13,24 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          clipBehavior: Clip.antiAlias,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment(-0.21, -0.98),
-              end: Alignment(0.21, 0.98),
-              colors: [
-                Color(0xFF391A49),
-                Color(0xFF2F1D5B),
-                Color(0xFF262171),
-                Color(0xFF301D5B),
-                Color(0xFF391A49)
-              ],
-            ),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        clipBehavior: Clip.antiAlias,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment(-0.21, -0.98),
+            end: Alignment(0.21, 0.98),
+            colors: [
+              Color(0xFF391A49),
+              Color(0xFF2F1D5B),
+              Color(0xFF262171),
+              Color(0xFF301D5B),
+              Color(0xFF391A49)
+            ],
           ),
-          child: const SearchWidget(),
         ),
+        child: const SearchWidget(),
       ),
     );
   }
@@ -71,7 +69,7 @@ class _SearchWidgetState extends ConsumerState<SearchWidget> {
         return true;
       },
       child: Padding(
-        padding: const EdgeInsets.only(top: 20, left: 24, right: 24),
+        padding: const EdgeInsets.only(top: 38, left: 24, right: 24),
         child: ClipRRect(
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 0, sigmaY: 4),

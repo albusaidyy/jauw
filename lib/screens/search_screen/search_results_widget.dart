@@ -14,50 +14,48 @@ class SearchResultsWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final searchProvider = ref.watch(searchLocationProvider);
 
-    return Expanded(
-      child: switch (searchProvider) {
-        AsyncData(:final value) => value == null
-            ? const SizedBox()
-            : value.locations.isEmpty
-                ? Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'No results',
-                        style: kBoldFont.copyWith(fontSize: 18),
-                      )
-                    ],
-                  )
-                : ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: value.locations.length,
-                    itemBuilder: (context, index) {
-                      final location = value.locations[index];
-                      return SearchResultItem(
-                        location: location,
-                      );
-                    },
-                  ),
+    return switch (searchProvider) {
+      AsyncData(:final value) => value == null
+          ? const SizedBox()
+          : value.locations.isEmpty
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'No results',
+                      style: kBoldFont.copyWith(fontSize: 18),
+                    )
+                  ],
+                )
+              : ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: value.locations.length,
+                  itemBuilder: (context, index) {
+                    final location = value.locations[index];
+                    return SearchResultItem(
+                      location: location,
+                    );
+                  },
+                ),
 
-        // ignore: unused_local_variable
-        AsyncError(:final error) => Text(
-            'Oops, something unexpected happened',
-            style: kBoldFont.copyWith(fontSize: 18),
-          ),
-        AsyncLoading() => Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'Searching...',
-                style: kBoldFont.copyWith(fontSize: 18),
-              )
-            ],
-          ),
-        _ => const SizedBox(),
-      },
-    );
+      // ignore: unused_local_variable
+      AsyncError(:final error) => Text(
+          'Oops, something unexpected happened',
+          style: kBoldFont.copyWith(fontSize: 18),
+        ),
+      AsyncLoading() => Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'Searching...',
+              style: kBoldFont.copyWith(fontSize: 18),
+            )
+          ],
+        ),
+      _ => const SizedBox(),
+    };
   }
 }
 

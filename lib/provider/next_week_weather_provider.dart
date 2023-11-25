@@ -46,7 +46,6 @@ final nextwkeatherProvider = FutureProvider.autoDispose((ref) async {
   );
   //decode the JSON payload
   final json = jsonDecode(response.body);
+  print(json);
   return NextWeekWeather.fromJson(json);
 });
-
-

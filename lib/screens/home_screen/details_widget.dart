@@ -14,11 +14,10 @@ class DetailsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: 519,
+      top: 537,
       left: 24,
       right: 24,
       child: SizedBox(
-        width: 345,
         height: 80,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

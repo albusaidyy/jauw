@@ -14,8 +14,7 @@ class SavedLocationsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: SafeArea(
-          child: Container(
+      body: Container(
         width: double.infinity,
         height: double.infinity,
         clipBehavior: Clip.antiAlias,
@@ -39,7 +38,7 @@ class SavedLocationsScreen extends StatelessWidget {
             AddNewWidget(),
           ],
         ),
-      )),
+      ),
     );
   }
 }
@@ -53,7 +52,7 @@ class HeaderSavedLocations extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isSearching = ref.watch(searchListBoolNotifierProvider);
     return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 24, 32, 20),
+      padding: const EdgeInsets.fromLTRB(24, 50, 32, 20),
       child: SizedBox(
         width: double.infinity,
         height: 32,

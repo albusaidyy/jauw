@@ -17,7 +17,7 @@ class MainDetailsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: 230,
+      top: 248,
       left: 0,
       right: 0,
       child: Column(
