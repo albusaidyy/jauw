@@ -1,7 +1,8 @@
 # Weather App Contest
 
-<a href=""><img src="./assets/banner.png"></img></a>
+<a href=""><img src="./screenshots/banner.png"></img></a>
 
+A real-time weather application based on the current location of the user or different searchable locations. 
 
 ### Language & Tools used:
 - Flutter & Dart
@@ -30,11 +31,11 @@ Take a look at the [App](https://)
 
 ## weatherapi
 - Head over to [weatherapi](https://www.weatherapi.com/) and sign up
-- After login create an api key (`Make sure you have the pro plus`)
+- After login create an API key (`Make sure you have the pro+ `) or the weekly data won't be populated. 
 - create a file name `api_key.dart` under `lib/auth/`
 - add the line below 
 >**const $weatherApiKey = 'YOUR_API_KEY_FROM_WEATHER_API';**
--hit flutter run on selected emulator/device
+- hit flutter run on the selected emulator/device
 
 
 ## Credit
