@@ -32,11 +32,14 @@ Take a look at the [App](https://)
 ## weatherapi
 - Head over to [weatherapi](https://www.weatherapi.com/) and sign up
 - After login create an API key (`Make sure you have the pro+ `) or the weekly data won't be populated. 
-- create a file name `api_key.dart` under `lib/auth/`
-- add the line below 
->**const $weatherApiKey = 'YOUR_API_KEY_FROM_WEATHER_API';**
+- Create a file named `api_key.dart` under `lib/auth/`
+- Add the line below
+  
+  >**const $weatherApiKey = 'YOUR_API_KEY_FROM_WEATHER_API';**
+  
 - hit flutter run on the selected emulator/device
 
 
-## Credit
+## Credits
 - [heyFluter.com](https://heyflutter.com/)
+- [Figma Design Template](https://www.figma.com/file/muEpuBiF0CM0yoLPm0wYRj/Weather-App-Design-Templates-(Community)?type=design&node-id=30-265&mode=design)
