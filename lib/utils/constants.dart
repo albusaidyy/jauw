@@ -99,7 +99,7 @@ double setBackgroundOpacity(int weatherCode) {
 
 List<dynamic> setBackroundImage(String locationName) {
   bool isVisible = false;
-  String imageName = 'download.jpeg';
+  String imageName = 'background.jpeg';
 
   switch (locationName) {
     case 'New York':
@@ -110,31 +110,31 @@ List<dynamic> setBackroundImage(String locationName) {
       isVisible = true;
       imageName = 'paris.png';
       break;
-      case 'Dubai':
+    case 'Dubai':
       isVisible = true;
       imageName = 'dubai.png';
       break;
-      case 'Bangkok':
+    case 'Bangkok':
       isVisible = true;
       imageName = 'bangkok.png';
       break;
-      case 'Barcelona':
+    case 'Barcelona':
       isVisible = true;
       imageName = 'barcelona.png';
       break;
-      case 'Rome':
+    case 'Rome':
       isVisible = true;
       imageName = 'rome.png';
       break;
-      case 'Beijing':
+    case 'Beijing':
       isVisible = true;
       imageName = 'beijing.png';
       break;
-      case 'London':
+    case 'London':
       isVisible = true;
       imageName = 'london.png';
       break;
-      case 'Minsk':
+    case 'Minsk':
       isVisible = true;
       imageName = 'minsk.png';
       break;
@@ -142,6 +142,5 @@ List<dynamic> setBackroundImage(String locationName) {
     default:
       break;
   }
-    return [isVisible, imageName];
-
+  return [isVisible, imageName];
 }

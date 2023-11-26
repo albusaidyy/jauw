@@ -10,8 +10,8 @@ A real-time weather application based on the current location of the user or dif
 - Riverpod  - State management
 
 
-### Demo
-Take a look at the [App](https://)
+<!-- ### Demo
+Take a look at the [App](https://) -->
 
 >**This is only a simulation of the mobile user experience from your laptop, desktop or tablet.**
 
