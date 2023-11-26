@@ -185,7 +185,7 @@ class HomeScreen extends ConsumerWidget {
                         const CircularProgressIndicator(
                             color: Colors.white, strokeWidth: 2),
                         const SizedBox(
-                          height: 8,
+                          height: 10,
                         ),
                         Text(
                           'Loading...',
