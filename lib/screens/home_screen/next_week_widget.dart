@@ -90,8 +90,8 @@ class NextWeekItem extends StatelessWidget {
           height: 12,
         ),
         SizedBox(
-          width: 41,
-          height: 35,
+          width: 45,
+          height: 40,
           child: Image.network('https:${fDay.day.condition.icon}'),
         ),
         const SizedBox(

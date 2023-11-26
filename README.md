@@ -43,3 +43,4 @@ Take a look at the [App](https://)
 ## Credits
 - [heyFluter.com](https://heyflutter.com/)
 - [Figma Design Template](https://www.figma.com/file/muEpuBiF0CM0yoLPm0wYRj/Weather-App-Design-Templates-(Community)?type=design&node-id=30-265&mode=design)
+- Launcher Icon : <a href="https://www.flaticon.com/free-icons/sun" title="sun icons">Sun icons created by kawalanicon - Flaticon</a>

@@ -87,11 +87,12 @@ class HomeScreen extends ConsumerWidget {
                                   style: kRegularFont),
                               const Spacer(),
                               GestureDetector(
-                                onTap: () => Navigator.of(context)
-                                    .push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      const SavedLocationsScreen(),
-                                )),
+                                onTap: () => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const SavedLocationsScreen(),
+                                  ),
+                                ),
                                 child: const Icon(
                                   Icons.menu,
                                   color: Colors.white,
@@ -153,9 +154,29 @@ class HomeScreen extends ConsumerWidget {
                     ),
                   //incase of an error
                   // ignore: unused_local_variable
-                  AsyncError(:final error) => Text(
-                      'Oops, something unexpected happened',
-                      style: kBoldFont.copyWith(fontSize: 18),
+                  AsyncError(:final error) => Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Oops, something unexpected happened',
+                          style: kBoldFont.copyWith(fontSize: 18),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        ElevatedButton.icon(
+                          onPressed: () => ref.refresh(locationProvider.future),
+                          label: Text(
+                            'Retry',
+                            style: kBoldFont.copyWith(fontSize: 18),
+                          ),
+                          icon: const Icon(
+                            Icons.replay,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
                   _ => Column(
                       mainAxisAlignment: MainAxisAlignment.center,
