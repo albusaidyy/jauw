@@ -17,7 +17,7 @@ class NextWeekWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 // Get a sublist of forecastDay from index 8 to 12
-    List<Forecastday> sublist = forecastDay.sublist(8, 12);
+    // List<Forecastday> sublist = forecastDay.sublist(8, 12);
     return Positioned(
       top: 635,
       left: 24,
@@ -45,10 +45,10 @@ class NextWeekWidget extends StatelessWidget {
                 right: 19,
                 top: 16,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: sublist.asMap().entries.map((e) {
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: forecastDay.asMap().entries.map((e) {
                     final int index = e.key;
-                    return NextWeekItem(fDay: sublist[index]);
+                    return NextWeekItem(fDay: forecastDay[index]);
                   }).toList(),
                 ),
               ),

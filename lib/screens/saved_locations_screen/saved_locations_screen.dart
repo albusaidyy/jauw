@@ -12,11 +12,13 @@ class SavedLocationsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return WillPopScope(
-      onWillPop: () async {
-        ref.invalidate(searchQueryProvider);
-        ref.invalidate(searchListBoolNotifierProvider);
-        return true;
+    return PopScope(
+      onPopInvoked: (didPop) {
+        if (didPop) {
+          ref.invalidate(searchQueryProvider);
+          ref.invalidate(searchListBoolNotifierProvider);
+          return;
+        }
       },
       child: Scaffold(
         resizeToAvoidBottomInset: false,

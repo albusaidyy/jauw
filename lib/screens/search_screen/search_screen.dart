@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -62,10 +61,12 @@ class _SearchWidgetState extends ConsumerState<SearchWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        ref.invalidate(searchStringProvider);
-        return true;
+    return PopScope(
+      onPopInvoked: (didPop) {
+        if (didPop) {
+          ref.invalidate(searchStringProvider);
+          return;
+        }
       },
       child: Padding(
         padding: const EdgeInsets.only(top: 50, left: 24, right: 24),

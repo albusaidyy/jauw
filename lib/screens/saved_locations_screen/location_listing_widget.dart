@@ -72,9 +72,15 @@ class LocationListingWidget extends ConsumerWidget {
               ],
             );
           },
-          error: (error, stackTrace) => Text(
-            'Oops, something unexpected happened',
-            style: kBoldFont.copyWith(fontSize: 18),
+          error: (error, stackTrace) => Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'Oops, something unexpected happened',
+                style: kBoldFont.copyWith(fontSize: 18),
+              ),
+            ],
           ),
           loading: () => Column(
             mainAxisAlignment: MainAxisAlignment.center,
