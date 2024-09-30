@@ -1,7 +1,7 @@
 ### ------------------------- Flutter.gitignore ------------------------ ###
 
 
-# Hide key from version control
+# Rmove key from version control
 /lib/auth/api_key.dart
 
 # Miscellaneous

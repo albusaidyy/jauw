@@ -35,7 +35,7 @@ Take a look at the [App apk](https://drive.google.com/file/d/1i5PJy3TuSRcBuHyzrd
 - Create a file named `api_key.dart` under `lib/auth/`
 - Add the line below
   
-  >**const $weatherApiKey = 'YOUR_API_KEY_FROM_WEATHER_API';**
+  >**const weatherApiKey = 'YOUR_API_KEY_FROM_WEATHER_API';**
   
 - hit flutter run on the selected emulator/device
 
