@@ -1,3 +1,5 @@
+import 'package:device_preview_plus/device_preview_plus.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,8 +14,12 @@ void main() async {
     statusBarColor: Colors.transparent,
   ));
   runApp(
-    const ProviderScope(
-      child: MainApp(),
+    DevicePreview(
+      enabled: defaultTargetPlatform != TargetPlatform.android &&
+          defaultTargetPlatform != TargetPlatform.iOS,
+      devices: [Devices.ios.iPhone13ProMax],
+      isToolbarVisible: false,
+      builder: (context) => const ProviderScope(child: MainApp()),
     ),
   );
 }
@@ -24,7 +30,6 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      
       debugShowCheckedModeBanner: false,
       title: 'Weather App',
       theme: ThemeData(

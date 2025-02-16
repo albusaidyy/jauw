@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:weather_app/utils/extensions.dart';
 
 import '../../models/next_week_weather.dart';
 import '../../provider/saved_list_provider.dart';
@@ -72,7 +72,7 @@ class _SearchWidgetState extends ConsumerState<SearchSavedLocatonWidget> {
           textInputAction: TextInputAction.search,
           cursorColor: Colors.white,
           style: TextStyle(
-              color: Colors.white.withOpacity(0.80),
+              color: Colors.white.addOpacity(0.80),
               fontSize: 15,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.w500),
@@ -102,7 +102,7 @@ class _SearchWidgetState extends ConsumerState<SearchSavedLocatonWidget> {
             border: InputBorder.none,
             hintText: 'Enter Location',
             hintStyle: TextStyle(
-                color: Colors.white.withOpacity(0.80),
+                color: Colors.white.addOpacity(0.80),
                 fontSize: 15,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w500),

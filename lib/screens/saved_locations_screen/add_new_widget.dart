@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:weather_app/utils/extensions.dart';
 
 import '../search_screen/search_screen.dart';
 
@@ -49,7 +50,7 @@ class AddNewWidget extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.add_circle_outline_outlined,
-                      color: Colors.white.withOpacity(0.80),
+                      color: Colors.white.addOpacity(0.80),
                       size: 24,
                     ),
                     const SizedBox(
@@ -58,7 +59,7 @@ class AddNewWidget extends StatelessWidget {
                     Text(
                       'Add new',
                       style: TextStyle(
-                          color: Colors.white.withOpacity(0.80),
+                          color: Colors.white.addOpacity(0.80),
                           fontSize: 24,
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.w500),

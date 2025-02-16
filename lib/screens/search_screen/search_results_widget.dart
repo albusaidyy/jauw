@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/models/search_location_model.dart';
+import 'package:weather_app/utils/extensions.dart';
 
 import '../../provider/search_location_provider.dart';
 import '../../utils/constants.dart';
@@ -112,7 +113,7 @@ class _SearchResultItemState extends ConsumerState<SearchResultItem> {
         '${widget.location.region}${widget.location.region.isNotEmpty ? ', ' : ''}${widget.location.country}',
         style: kLightFont.copyWith(
           fontSize: 15,
-          color: Colors.white.withOpacity(0.8),
+          color: Colors.white.addOpacity(0.8),
           shadows: [
             const Shadow(
               color: Color(0x3E000000),
@@ -126,7 +127,7 @@ class _SearchResultItemState extends ConsumerState<SearchResultItem> {
               widget.location.id) //check if the id is present in or saved list
           ? Icon(
               Icons.check,
-              color: Colors.white.withOpacity(0.8),
+              color: Colors.white.addOpacity(0.8),
               size: 18,
             )
           : !isLoading

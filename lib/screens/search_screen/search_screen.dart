@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:weather_app/provider/search_location_provider.dart';
+import 'package:weather_app/utils/extensions.dart';
 
 import 'search_results_widget.dart';
 
@@ -62,7 +63,7 @@ class _SearchWidgetState extends ConsumerState<SearchWidget> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      onPopInvoked: (didPop) {
+      onPopInvokedWithResult: (didPop, _) {
         if (didPop) {
           ref.invalidate(searchStringProvider);
           return;
@@ -98,7 +99,7 @@ class _SearchWidgetState extends ConsumerState<SearchWidget> {
                 textInputAction: TextInputAction.search,
                 cursorColor: Colors.white,
                 style: TextStyle(
-                    color: Colors.white.withOpacity(0.80),
+                    color: Colors.white.addOpacity(0.80),
                     fontSize: 15,
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w500),
@@ -128,7 +129,7 @@ class _SearchWidgetState extends ConsumerState<SearchWidget> {
                   border: InputBorder.none,
                   hintText: 'Enter Location',
                   hintStyle: TextStyle(
-                      color: Colors.white.withOpacity(0.80),
+                      color: Colors.white.addOpacity(0.80),
                       fontSize: 15,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w500),

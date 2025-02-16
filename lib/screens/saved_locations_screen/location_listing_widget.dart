@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/models/next_week_weather.dart';
 import 'package:weather_app/provider/search_location_provider.dart';
 import 'package:weather_app/screens/saved_locations_screen/search_saved_location_widget.dart';
+import 'package:weather_app/utils/extensions.dart';
 
 import '../../provider/saved_list_provider.dart';
 import '../../utils/constants.dart';
@@ -202,7 +203,7 @@ class LocationItem extends StatelessWidget {
                                   weatherData.current.condition.text,
                                   style: kMediumFont.copyWith(
                                       fontSize: 16,
-                                      color: Colors.white.withOpacity(0.80)),
+                                      color: Colors.white.addOpacity(0.80)),
                                 )
                               ],
                             ),
@@ -228,7 +229,7 @@ class LocationItem extends StatelessWidget {
                             Text(
                               'Humidity',
                               style: kLightFont.copyWith(
-                                color: Colors.white.withOpacity(0.80),
+                                color: Colors.white.addOpacity(0.80),
                               ),
                             ),
                             const SizedBox(
@@ -251,7 +252,7 @@ class LocationItem extends StatelessWidget {
                             Text(
                               'Wind',
                               style: kLightFont.copyWith(
-                                color: Colors.white.withOpacity(0.80),
+                                color: Colors.white.addOpacity(0.80),
                               ),
                             ),
                             const SizedBox(

@@ -13,7 +13,7 @@ class SavedLocationsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return PopScope(
-      onPopInvoked: (didPop) {
+      onPopInvokedWithResult: (didPop, _) {
         if (didPop) {
           ref.invalidate(searchQueryProvider);
           ref.invalidate(searchListBoolNotifierProvider);

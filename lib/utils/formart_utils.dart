@@ -15,10 +15,10 @@ class FormartUtils {
     }
   }
 
-  String formatDateTimeWithTimeZone(
-      {required int dt,
-      required String localTime,
-     }) {
+  String formatDateTimeWithTimeZone({
+    required int dt,
+    required String localTime,
+  }) {
     // Convert localtime_epoch to DateTime
     DateTime utcTimefromEpoch =
         DateTime.fromMillisecondsSinceEpoch(dt * 1000, isUtc: true);
@@ -31,7 +31,6 @@ class FormartUtils {
 
     // Calculate the offset in hours
     Duration diff = localtimeFromString.difference(utcTime.toUtc());
-
 
     var formatter = DateFormat("EEE h:mm a");
     return '${formatter.format(localtimeFromString)} ${formatDuration(diff)}';

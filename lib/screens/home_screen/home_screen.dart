@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/provider/next_week_weather_provider.dart';
 import 'package:weather_app/screens/saved_locations_screen/saved_locations_screen.dart';
+import 'package:weather_app/utils/extensions.dart';
 import 'package:weather_app/utils/formart_utils.dart';
 
 import '../../utils/constants.dart';
@@ -57,9 +58,8 @@ class HomeScreen extends ConsumerWidget {
                           width: double.infinity,
                           height: double.infinity,
                           decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(
-                                setBackgroundOpacity(
-                                    valueOrNull.current.condition.code)),
+                            color: Colors.black.addOpacity(setBackgroundOpacity(
+                                valueOrNull.current.condition.code)),
                           ),
                         ),
                         Positioned(

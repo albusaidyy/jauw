@@ -56,7 +56,8 @@ class SLocation {
         country: json["country"],
         lat: json["lat"]?.toDouble(),
         lon: json["lon"]?.toDouble(),
-        url: json["url"], isLoading: false,
+        url: json["url"],
+        isLoading: false,
       );
 
   Map<String, dynamic> toJson() => {

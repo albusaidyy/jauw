@@ -5,7 +5,7 @@ class LocationUtils {
   ///
   /// When the location services are not enabled or permissions
   /// are denied the `Future` will return an error.
- static  Future<Position> determinePosition() async {
+  static Future<Position> determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
 

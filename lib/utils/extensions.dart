@@ -32,7 +32,6 @@ extension DebounceAndCancelExtension on Ref {
   }
 }
 
-
 extension OpacityParsing on Color {
   // .addOpacity() has been depreciated
   // The propesed replacement .withValues(alpha: ) has a max of 255
