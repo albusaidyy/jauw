@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
@@ -27,5 +29,18 @@ extension DebounceAndCancelExtension on Ref {
 
     // Finally, we return the client to allow our provider to make the request.
     return client;
+  }
+}
+
+
+extension OpacityParsing on Color {
+  // .addOpacity() has been depreciated
+  // The propesed replacement .withValues(alpha: ) has a max of 255
+  // Hence this extension method retains the scale of 0 to 1
+  Color addOpacity(double opacity) {
+    if (opacity >= 0.0 && opacity <= 1.0) {
+      return withAlpha((255.0 * opacity).round());
+    }
+    return this;
   }
 }
