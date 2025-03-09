@@ -19,7 +19,9 @@ void main() async {
           defaultTargetPlatform != TargetPlatform.iOS,
       devices: [Devices.ios.iPhone13ProMax],
       isToolbarVisible: false,
-      builder: (context) => const ProviderScope(child: MainApp()),
+      builder: (context) {
+        return const ProviderScope(child: MainApp());
+      },
     ),
   );
 }
