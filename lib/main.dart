@@ -19,6 +19,7 @@ void main() async {
           defaultTargetPlatform != TargetPlatform.iOS,
       devices: [Devices.ios.iPhone13ProMax],
       isToolbarVisible: false,
+      backgroundColor: Colors.black87,
       builder: (context) {
         return const ProviderScope(child: MainApp());
       },

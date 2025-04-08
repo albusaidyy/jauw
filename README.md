@@ -14,6 +14,7 @@ A real-time weather application based on the current location of the user or dif
 Take a look at the demo **[App](https://weather-app-ke.web.app/)**.
 
 >**This is only a simulation of the mobile user experience from your laptop, desktop or tablet.**
+
 Download [App apk](https://drive.google.com/file/d/1i5PJy3TuSRcBuHyzrdvjXspaCNYlOKJm/view?usp=sharing)
 
 
