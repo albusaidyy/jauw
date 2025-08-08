@@ -35,7 +35,7 @@ class SavedLocationsScreen extends ConsumerWidget {
                 Color(0xFF2F1D5B),
                 Color(0xFF262171),
                 Color(0xFF301D5B),
-                Color(0xFF391A49)
+                Color(0xFF391A49),
               ],
             ),
           ),

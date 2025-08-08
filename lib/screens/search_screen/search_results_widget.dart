@@ -16,45 +16,46 @@ class SearchResultsWidget extends ConsumerWidget {
     final searchProvider = ref.watch(searchLocationProvider);
 
     return switch (searchProvider) {
-      AsyncData(:final value) => value == null
-          ? const SizedBox()
-          : value.locations.isEmpty
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'No results',
-                      style: kBoldFont.copyWith(fontSize: 18),
-                    )
-                  ],
-                )
-              : ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: value.locations.length,
-                  itemBuilder: (context, index) {
-                    final location = value.locations[index];
-                    return SearchResultItem(
-                      location: location,
-                    );
-                  },
-                ),
+      AsyncData(:final value) =>
+        value == null
+            ? const SizedBox()
+            : value.locations.isEmpty
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'No results',
+                    style: kBoldFont.copyWith(fontSize: 18),
+                  ),
+                ],
+              )
+            : ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: value.locations.length,
+                itemBuilder: (context, index) {
+                  final location = value.locations[index];
+                  return SearchResultItem(
+                    location: location,
+                  );
+                },
+              ),
 
       // ignore: unused_local_variable
       AsyncError(:final error) => Text(
-          'Oops, something unexpected happened',
-          style: kBoldFont.copyWith(fontSize: 18),
-        ),
+        'Oops, something unexpected happened',
+        style: kBoldFont.copyWith(fontSize: 18),
+      ),
       AsyncLoading() => Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              'Searching...',
-              style: kBoldFont.copyWith(fontSize: 18),
-            )
-          ],
-        ),
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            'Searching...',
+            style: kBoldFont.copyWith(fontSize: 18),
+          ),
+        ],
+      ),
       _ => const SizedBox(),
     };
   }
@@ -123,34 +124,36 @@ class _SearchResultItemState extends ConsumerState<SearchResultItem> {
           ],
         ),
       ),
-      trailing: savedList.contains(
-              widget.location.id) //check if the id is present in or saved list
+      trailing:
+          savedList.contains(
+            widget.location.id,
+          ) //check if the id is present in or saved list
           ? Icon(
               Icons.check,
               color: Colors.white.addOpacity(0.8),
               size: 18,
             )
           : !isLoading
-              ? GestureDetector(
-                  onTap: () {
-                    addItemToList(savedList);
-                  },
-                  child: const Icon(
-                    Icons.add,
-                    color: Colors.white,
-                    size: 18,
-                  ),
-                )
-              : const SizedBox(
-                  width: 18,
-                  height: 18,
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      color: Colors.white,
-                      strokeWidth: 1.5,
-                    ),
-                  ),
+          ? GestureDetector(
+              onTap: () {
+                addItemToList(savedList);
+              },
+              child: const Icon(
+                Icons.add,
+                color: Colors.white,
+                size: 18,
+              ),
+            )
+          : const SizedBox(
+              width: 18,
+              height: 18,
+              child: Center(
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                  strokeWidth: 1.5,
                 ),
+              ),
+            ),
     );
   }
 }

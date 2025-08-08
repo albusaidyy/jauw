@@ -20,14 +20,18 @@ class FormartUtils {
     required String localTime,
   }) {
     // Convert localtime_epoch to DateTime
-    DateTime utcTimefromEpoch =
-        DateTime.fromMillisecondsSinceEpoch(dt * 1000, isUtc: true);
-    DateTime utcTime =
-        DateFormat("yyyy-MM-dd HH:mm").parse(utcTimefromEpoch.toString());
+    DateTime utcTimefromEpoch = DateTime.fromMillisecondsSinceEpoch(
+      dt * 1000,
+      isUtc: true,
+    );
+    DateTime utcTime = DateFormat(
+      "yyyy-MM-dd HH:mm",
+    ).parse(utcTimefromEpoch.toString());
 
     // Convert localtime string to DateTime
-    DateTime localtimeFromString =
-        DateFormat("yyyy-MM-dd HH:mm").parse(localTime);
+    DateTime localtimeFromString = DateFormat(
+      "yyyy-MM-dd HH:mm",
+    ).parse(localTime);
 
     // Calculate the offset in hours
     Duration diff = localtimeFromString.difference(utcTime.toUtc());

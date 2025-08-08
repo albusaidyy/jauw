@@ -13,8 +13,8 @@ class SearchLocation {
   String toRawJson() => json.encode(toJson());
 
   factory SearchLocation.fromJson(List<dynamic> json) => SearchLocation(
-        locations: List<SLocation>.from(json.map((x) => SLocation.fromJson(x))),
-      );
+    locations: List<SLocation>.from(json.map((x) => SLocation.fromJson(x))),
+  );
 
   List<dynamic> toJson() =>
       List<dynamic>.from(locations.map((x) => x.toJson()));
@@ -48,25 +48,24 @@ class SLocation {
 
   factory SLocation.fromJson(
     Map<String, dynamic> json,
-  ) =>
-      SLocation(
-        id: json["id"],
-        name: json["name"],
-        region: json["region"],
-        country: json["country"],
-        lat: json["lat"]?.toDouble(),
-        lon: json["lon"]?.toDouble(),
-        url: json["url"],
-        isLoading: false,
-      );
+  ) => SLocation(
+    id: json["id"],
+    name: json["name"],
+    region: json["region"],
+    country: json["country"],
+    lat: json["lat"]?.toDouble(),
+    lon: json["lon"]?.toDouble(),
+    url: json["url"],
+    isLoading: false,
+  );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "region": region,
-        "country": country,
-        "lat": lat,
-        "lon": lon,
-        "url": url,
-      };
+    "id": id,
+    "name": name,
+    "region": region,
+    "country": country,
+    "lat": lat,
+    "lon": lon,
+    "url": url,
+  };
 }
