@@ -33,43 +33,43 @@ class LocationListingWidget extends ConsumerWidget {
               children: [
                 SearchSavedLocatonWidget(query: query, savedList: data),
                 Expanded(
-                    child: isResult
-                        ? Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'No Results',
-                                style: kBoldFont.copyWith(fontSize: 18),
-                              )
-                            ],
-                          )
-                        : (data.isEmpty)
-                            ? Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'No Saved Locations',
-                                    style: kBoldFont.copyWith(fontSize: 18),
-                                  )
-                                ],
-                              )
-                            : ListView.builder(
-                                padding: EdgeInsets.zero,
-                                physics: const AlwaysScrollableScrollPhysics(),
-                                itemCount: searchLSavedistNotifier.isNotEmpty
-                                    ? searchLSavedistNotifier.length
-                                    : data.length,
-                                itemBuilder: (context, index) {
-                                  return LocationItem(
-                                    weatherData:
-                                        searchLSavedistNotifier.isNotEmpty
-                                            ? searchLSavedistNotifier[index]
-                                            : data[index],
-                                  );
-                                },
-                              )),
+                  child: isResult
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'No Results',
+                              style: kBoldFont.copyWith(fontSize: 18),
+                            ),
+                          ],
+                        )
+                      : (data.isEmpty)
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'No Saved Locations',
+                              style: kBoldFont.copyWith(fontSize: 18),
+                            ),
+                          ],
+                        )
+                      : ListView.builder(
+                          padding: EdgeInsets.zero,
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          itemCount: searchLSavedistNotifier.isNotEmpty
+                              ? searchLSavedistNotifier.length
+                              : data.length,
+                          itemBuilder: (context, index) {
+                            return LocationItem(
+                              weatherData: searchLSavedistNotifier.isNotEmpty
+                                  ? searchLSavedistNotifier[index]
+                                  : data[index],
+                            );
+                          },
+                        ),
+                ),
               ],
             );
           },
@@ -88,7 +88,9 @@ class LocationListingWidget extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const CircularProgressIndicator(
-                  color: Colors.white, strokeWidth: 2),
+                color: Colors.white,
+                strokeWidth: 2,
+              ),
               const SizedBox(
                 height: 8,
               ),
@@ -202,9 +204,10 @@ class LocationItem extends StatelessWidget {
                                 Text(
                                   weatherData.current.condition.text,
                                   style: kMediumFont.copyWith(
-                                      fontSize: 16,
-                                      color: Colors.white.addOpacity(0.80)),
-                                )
+                                    fontSize: 16,
+                                    color: Colors.white.addOpacity(0.80),
+                                  ),
+                                ),
                               ],
                             ),
                             Container(
@@ -213,11 +216,12 @@ class LocationItem extends StatelessWidget {
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   image: NetworkImage(
-                                      'https:${weatherData.current.condition.icon}'),
+                                    'https:${weatherData.current.condition.icon}',
+                                  ),
                                   fit: BoxFit.fill,
                                 ),
                               ),
-                            )
+                            ),
                           ],
                         ),
                         const SizedBox(
@@ -265,7 +269,7 @@ class LocationItem extends StatelessWidget {
                               ),
                             ),
                           ],
-                        )
+                        ),
                       ],
                     ),
                   ],

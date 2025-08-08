@@ -10,12 +10,15 @@ import 'screens/home_screen/home_screen.dart';
 void main() async {
   // Initialize the locale data
   await initializeDateFormatting();
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-  ));
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+    ),
+  );
   runApp(
     DevicePreview(
-      enabled: defaultTargetPlatform != TargetPlatform.android &&
+      enabled:
+          defaultTargetPlatform != TargetPlatform.android &&
           defaultTargetPlatform != TargetPlatform.iOS,
       devices: [Devices.ios.iPhone13ProMax],
       isToolbarVisible: false,

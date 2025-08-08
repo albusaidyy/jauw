@@ -25,7 +25,7 @@ class SearchScreen extends StatelessWidget {
               Color(0xFF2F1D5B),
               Color(0xFF262171),
               Color(0xFF301D5B),
-              Color(0xFF391A49)
+              Color(0xFF391A49),
             ],
           ),
         ),
@@ -99,10 +99,11 @@ class _SearchWidgetState extends ConsumerState<SearchWidget> {
                 textInputAction: TextInputAction.search,
                 cursorColor: Colors.white,
                 style: TextStyle(
-                    color: Colors.white.addOpacity(0.80),
-                    fontSize: 15,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500),
+                  color: Colors.white.addOpacity(0.80),
+                  fontSize: 15,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                ),
                 decoration: InputDecoration(
                   suffixIcon: _focusNode.hasFocus
                       ? GestureDetector(
@@ -129,10 +130,11 @@ class _SearchWidgetState extends ConsumerState<SearchWidget> {
                   border: InputBorder.none,
                   hintText: 'Enter Location',
                   hintStyle: TextStyle(
-                      color: Colors.white.addOpacity(0.80),
-                      fontSize: 15,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500),
+                    color: Colors.white.addOpacity(0.80),
+                    fontSize: 15,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
             ),

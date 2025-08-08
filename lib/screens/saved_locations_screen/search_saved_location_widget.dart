@@ -7,8 +7,11 @@ import '../../models/next_week_weather.dart';
 import '../../provider/saved_list_provider.dart';
 
 class SearchSavedLocatonWidget extends ConsumerStatefulWidget {
-  const SearchSavedLocatonWidget(
-      {super.key, required this.query, required this.savedList});
+  const SearchSavedLocatonWidget({
+    super.key,
+    required this.query,
+    required this.savedList,
+  });
   final String query;
   final List<NextWeekWeather> savedList;
 
@@ -72,10 +75,11 @@ class _SearchWidgetState extends ConsumerState<SearchSavedLocatonWidget> {
           textInputAction: TextInputAction.search,
           cursorColor: Colors.white,
           style: TextStyle(
-              color: Colors.white.addOpacity(0.80),
-              fontSize: 15,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w500),
+            color: Colors.white.addOpacity(0.80),
+            fontSize: 15,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.w500,
+          ),
           decoration: InputDecoration(
             suffixIcon: _focusNode.hasFocus
                 ? GestureDetector(
@@ -102,10 +106,11 @@ class _SearchWidgetState extends ConsumerState<SearchSavedLocatonWidget> {
             border: InputBorder.none,
             hintText: 'Enter Location',
             hintStyle: TextStyle(
-                color: Colors.white.addOpacity(0.80),
-                fontSize: 15,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w500),
+              color: Colors.white.addOpacity(0.80),
+              fontSize: 15,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
       ),

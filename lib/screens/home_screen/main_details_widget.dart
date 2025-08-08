@@ -36,13 +36,17 @@ class MainDetailsWidget extends StatelessWidget {
           ),
           Text(
             wCurrent.condition.text,
-            style: kBoldFont.copyWith(shadows: [
-              const Shadow(
-                color: Color(0x3E000000),
-                blurRadius: 4,
-                offset: Offset(0, 4),
-              ),
-            ], fontWeight: FontWeight.w700, height: 0),
+            style: kBoldFont.copyWith(
+              shadows: [
+                const Shadow(
+                  color: Color(0x3E000000),
+                  blurRadius: 4,
+                  offset: Offset(0, 4),
+                ),
+              ],
+              fontWeight: FontWeight.w700,
+              height: 0,
+            ),
           ),
           Row(
             mainAxisSize: MainAxisSize.max,
@@ -100,7 +104,7 @@ class MainDetailsWidget extends StatelessWidget {
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );

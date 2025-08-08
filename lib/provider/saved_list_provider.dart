@@ -16,10 +16,12 @@ class SearchLSavedistNotifier extends Notifier<List<NextWeekWeather>> {
 
     if (query.isNotEmpty) {
       final result = savedList
-          .where((element) => element.location.name
-              .toString()
-              .toLowerCase()
-              .contains(query.toString().toLowerCase()))
+          .where(
+            (element) => element.location.name
+                .toString()
+                .toLowerCase()
+                .contains(query.toString().toLowerCase()),
+          )
           .toSet()
           .toList();
       state.addAll(result);
@@ -36,7 +38,8 @@ class SearchLSavedistNotifier extends Notifier<List<NextWeekWeather>> {
 
 final searchSavedListNotifierProvider =
     NotifierProvider<SearchLSavedistNotifier, List<NextWeekWeather>>(
-        SearchLSavedistNotifier.new);
+      SearchLSavedistNotifier.new,
+    );
 
 class SearchListBoolNotifier extends AutoDisposeNotifier<bool> {
   @override
@@ -47,4 +50,5 @@ class SearchListBoolNotifier extends AutoDisposeNotifier<bool> {
 
 final searchListBoolNotifierProvider =
     NotifierProvider.autoDispose<SearchListBoolNotifier, bool>(
-        SearchListBoolNotifier.new);
+      SearchListBoolNotifier.new,
+    );
