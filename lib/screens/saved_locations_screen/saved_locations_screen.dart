@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:weather_app/provider/saved_list_provider.dart';
-import 'package:weather_app/utils/constants.dart';
+import 'package:jauw/provider/saved_list_provider.dart';
+import 'package:jauw/utils/constants.dart';
 
 import 'add_new_widget.dart';
 import 'location_listing_widget.dart';

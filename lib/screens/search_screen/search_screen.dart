@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:weather_app/provider/search_location_provider.dart';
-import 'package:weather_app/utils/extensions.dart';
+import 'package:jauw/provider/search_location_provider.dart';
+import 'package:jauw/utils/extensions.dart';
 
 import 'search_results_widget.dart';
 

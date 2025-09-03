@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_app/provider/next_week_weather_provider.dart';
-import 'package:weather_app/screens/saved_locations_screen/saved_locations_screen.dart';
-import 'package:weather_app/utils/extensions.dart';
-import 'package:weather_app/utils/formart_utils.dart';
+import 'package:jauw/provider/next_week_weather_provider.dart';
+import 'package:jauw/screens/saved_locations_screen/saved_locations_screen.dart';
+import 'package:jauw/utils/extensions.dart';
+import 'package:jauw/utils/formart_utils.dart';
 
 import '../../utils/constants.dart';
 import 'details_widget.dart';

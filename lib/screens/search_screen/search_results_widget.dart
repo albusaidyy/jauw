@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_app/models/search_location_model.dart';
-import 'package:weather_app/utils/extensions.dart';
+import 'package:jauw/models/search_location_model.dart';
+import 'package:jauw/utils/extensions.dart';
 
 import '../../provider/search_location_provider.dart';
 import '../../utils/constants.dart';

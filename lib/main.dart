@@ -37,7 +37,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Weather App',
+      title: 'Jauw',
       theme: ThemeData(
         useMaterial3: false,
         fontFamily: 'Roboto',
