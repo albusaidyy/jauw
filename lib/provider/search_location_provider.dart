@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:weather_app/utils/extensions.dart';
+import 'package:jauw/utils/extensions.dart';
 import 'package:http/http.dart' as http;
 
 import '../auth/api_key.dart';

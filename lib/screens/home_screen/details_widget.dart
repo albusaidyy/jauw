@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:weather_app/models/next_week_weather.dart';
+import 'package:jauw/models/next_week_weather.dart';
 
 import '../../utils/constants.dart';
 

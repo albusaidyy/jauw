@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:weather_app/utils/extensions.dart';
+import 'package:jauw/utils/extensions.dart';
 
 import '../search_screen/search_screen.dart';
 

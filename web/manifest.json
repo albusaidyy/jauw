@@ -1,11 +1,11 @@
 {
-    "name": "Weather App",
-    "short_name": " Weather App",
+    "name": "Jauw",
+    "short_name": "Jaw",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#hexcode",
     "theme_color": "#hexcode",
-    "description": "A simple Weather App.",
+    "description": "Jauw - Weather App.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

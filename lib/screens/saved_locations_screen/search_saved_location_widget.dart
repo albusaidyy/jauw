@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:weather_app/utils/extensions.dart';
+import 'package:jauw/utils/extensions.dart';
 
 import '../../models/next_week_weather.dart';
 import '../../provider/saved_list_provider.dart';

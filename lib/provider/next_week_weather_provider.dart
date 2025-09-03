@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
-import 'package:weather_app/models/next_week_weather.dart';
+import 'package:jauw/models/next_week_weather.dart';
 
 import '../auth/api_key.dart';
 import '../utils/location_utils.dart';
